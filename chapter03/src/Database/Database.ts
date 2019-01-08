@@ -1,6 +1,7 @@
+import { RecordState } from 'src/RecordState';
 import { ITable } from './TableBuilder';
 
-export class Database<T> {
+export class Database<T extends RecordState> {
 
     private readonly indexDb: IDBFactory;
     private database: IDBDatabase | null = null;
@@ -17,40 +18,52 @@ export class Database<T> {
         dbStore!.add(state);
     }
 
-    public Read(callback: (value: T) => void) {
-        const dbStore = this.GetObjectStore();
-
-        const request: IDBRequest = dbStore!.openCursor();
-        request.onsuccess = (e: any) => {
-            if (e.target.result instanceof IDBCursorWithValue) {
+    public Read() : Promise<T[]> {
+        return new Promise((response) => {
+            const dbStore = this.GetObjectStore();
+            const items : T[] = new Array<T>();
+            const request: IDBRequest = dbStore!.openCursor();
+            request.onsuccess = (e: any) => {
                 const cursor: IDBCursorWithValue = e.target.result;
-                const result: T = cursor.value;
-                callback(result)
-                cursor.continue();
+                if (cursor) {
+                    const result: T = cursor.value;
+                    if (result.IsActive) {
+                        items.push(result);
+                    }
+                    cursor.continue();
+                } else {
+                    // When cursor is null, that is the point that we want to return back to our calling code. 
+                    response(items);
+                }
             }
-        }
+        });
     }
 
-    public Update(key : number | string, state: T, callback: () => void) : void {
-      const dbStore = this.GetObjectStore();
+    public Update(key : number | string, state: T) : Promise<void> {
+        return new Promise((resolve) =>
+        {
+            const dbStore = this.GetObjectStore();
+            const innerRequest : IDBRequest = dbStore!.put(state);
+            innerRequest.onsuccess = () => {
+              resolve();
+            }        
+        });
+    }
 
-      const index : IDBIndex = dbStore!.index(this.table.IndexName());
-      const request : IDBRequest = index.get(key)
-      request.onsuccess = (e: any) => {
-        const innerRequest : IDBRequest = dbStore!.put(state);
-        innerRequest.onsuccess = () => {
-          callback();
-        }
-      }
-  }
-
-    public Delete(idx: number | string, callback: () => void) {
-        const dbStore = this.GetObjectStore();
-
-        const request : IDBRequest = dbStore!.delete(idx.toString());
-        request.onsuccess = () => {
-          callback();
-        }
+    /*
+    Note, we aren't actually calling this method of deleting. This version physically deletes the record from
+    the database. The way that we are deleting the record in this application is by setting the IsActive flag to false,
+    which will be ignored when we read the record.
+    */
+    public Delete(idx: number | string) : Promise<void> {
+        return new Promise((resolve) =>
+        {
+            const dbStore = this.GetObjectStore();
+            const innerRequest : IDBRequest = dbStore!.delete(idx.toString());
+            innerRequest.onsuccess = () => {
+              resolve();
+            }        
+        });
     }
 
     private OpenDatabase(): void {

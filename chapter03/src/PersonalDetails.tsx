@@ -16,7 +16,7 @@ interface IProps {
 export default class PersonalDetails extends React.Component<IProps, IPersonState> {
 
   private defaultState: Readonly<IPersonState>;
-  private readonly dataLayer: Database<IPersonState>;
+  private readonly dataLayer: Database<PersonRecord>;
   private people: IPersonState[];
   private canSave : boolean = false;
 
@@ -139,13 +139,39 @@ export default class PersonalDetails extends React.Component<IProps, IPersonStat
   }
 
   private delete = (event : any) => {
-    this.dataLayer.Delete(event.target.value, () => this.loadPeople());
+    const person : string = event.target.value;
+    this.DeletePerson(person);
+    // const foundPerson = this.people.find((element : IPersonState) => {
+    //   return element.PersonId === person;
+    // });
+    // if (!foundPerson) {
+    //   return;
+    // }
+    // const personState : IRecordState = new RecordState();
+    // personState.SetActive(false);
+    // const state : PersonRecord = {...foundPerson, ...personState};
+    // this.dataLayer.UpdateAsync(state.PersonId, state).then(() => this.loadPeople());
+  }
+
+  private async DeletePerson(person : string) {
+    const foundPerson = this.people.find((element : IPersonState) => {
+      return element.PersonId === person;
+    });
+    if (!foundPerson) {
+      return;
+    }
+    const personState : IRecordState = new RecordState();
+    personState.SetActive(false);
+    const state : PersonRecord = {...foundPerson, ...personState};
+    await this.dataLayer.Update(state.PersonId, state);
+    this.loadPeople();
+    this.clear();
   }
 
   private loadPeople = () => {
-    this.people = new Array<IPersonState>();
-    this.dataLayer.Read((person : IPersonState) => {
-      this.people.push(person);
+    this.people = new Array<PersonRecord>();
+    this.dataLayer.Read().then(people => {
+      this.people = people;
       this.setState(this.state);
     });
   }
@@ -172,11 +198,10 @@ export default class PersonalDetails extends React.Component<IProps, IPersonStat
       state.PersonId = Date.now().toString();
       this.dataLayer.Create(state);
       this.loadPeople();
+      this.clear();
     }
     else {
-      this.dataLayer.Update(state.PersonId, state, ()=>{
-        this.loadPeople();
-      })
+      this.dataLayer.Update(state.PersonId, state).then(rsn => this.loadPeople());
     }
   }
 
