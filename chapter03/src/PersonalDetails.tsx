@@ -141,16 +141,6 @@ export default class PersonalDetails extends React.Component<IProps, IPersonStat
   private delete = (event : any) => {
     const person : string = event.target.value;
     this.DeletePerson(person);
-    // const foundPerson = this.people.find((element : IPersonState) => {
-    //   return element.PersonId === person;
-    // });
-    // if (!foundPerson) {
-    //   return;
-    // }
-    // const personState : IRecordState = new RecordState();
-    // personState.SetActive(false);
-    // const state : PersonRecord = {...foundPerson, ...personState};
-    // this.dataLayer.UpdateAsync(state.PersonId, state).then(() => this.loadPeople());
   }
 
   private async DeletePerson(person : string) {
