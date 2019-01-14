@@ -5,7 +5,7 @@ export class RegularExpressionValidator implements IValidator<StringOrNull> {
   constructor(expression : string) {
     this.regex = new RegExp(expression);
   }
-  public IsValid (input : string) : boolean {
+  public IsValid (input : StringOrNull) : boolean {
     if (!input) {
       return false;
     }
