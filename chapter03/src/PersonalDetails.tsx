@@ -153,7 +153,7 @@ export default class PersonalDetails extends React.Component<IProps, IPersonStat
     const personState : IRecordState = new RecordState();
     personState.IsActive = false;
     const state : PersonRecord = {...foundPerson, ...personState};
-    await this.dataLayer.Update(state.PersonId, state);
+    await this.dataLayer.Update(state);
     this.loadPeople();
     this.clear();
   }
@@ -191,7 +191,7 @@ export default class PersonalDetails extends React.Component<IProps, IPersonStat
       this.clear();
     }
     else {
-      this.dataLayer.Update(state.PersonId, state).then(rsn => this.loadPeople());
+      this.dataLayer.Update(state).then(rsn => this.loadPeople());
     }
   }
 

@@ -39,7 +39,7 @@ export class Database<T extends RecordState> {
         });
     }
 
-    public Update(key : number | string, state: T) : Promise<void> {
+    public Update(state: T) : Promise<void> {
         return new Promise((resolve) =>
         {
             const dbStore = this.GetObjectStore();
