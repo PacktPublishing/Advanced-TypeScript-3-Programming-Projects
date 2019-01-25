@@ -1,0 +1,3 @@
+tsc --init
+npm init -y // creates package.json
+npm install express mongoose cors multer --save
