@@ -1,4 +1,5 @@
-<mat-sidenav-container class="sidenav-container">
+<div class="container" fxLayout="row" fxLayout.xs="column" fxLayoutWrap fxLayoutGap="0.5%" fxLayoutAlign="center">
+    <mat-sidenav-container class="sidenav-container">
   <mat-sidenav #drawer class="sidenav" fixedInViewport="true"
       [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
       [mode]="(isHandset$ | async) ? 'over' : 'side'"
@@ -6,7 +7,7 @@
     <mat-toolbar>Menu</mat-toolbar>
     <mat-nav-list>
       <a mat-list-item href="#">Show images</a>
-      <a mat-list-item href="#">Import image</a>
+      <a mat-list-item (click)="ImportImage()">Import image</a>
     </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content>
@@ -20,6 +21,6 @@
       </button>
       <span>Advanced TypeScript</span>
     </mat-toolbar>
-    <atp-fileupload></atp-fileupload>
+    <atp-page-body></atp-page-body>
   </mat-sidenav-content>
-</mat-sidenav-container>
+</mat-sidenav-container></div>

@@ -23,12 +23,16 @@ export class Server {
     return this;
   }
 
-  public Initialize() : void {
+  public Start() : void {
     this.app.use(bodyParser.json());
     this.app.use(bodyParser.urlencoded({extended: true}));
-    this.app.get(`/`, (req : any, res : any) => res.send(`Hello World!`));
+    this.OnStart();
     this.app.listen(this.port, () => console.log(`Express server running on port ${this.port}`));
+  }
+
+  protected OnStart() : void {
+    this.app.get(`/`, (request : any, response : any) => response.send(`Hello from the server`));
   }
 }
 
-new Server(3000).WithCorsSupport().WithHeaders().Initialize();
+new Server(3000).WithCorsSupport().WithHeaders().Start();

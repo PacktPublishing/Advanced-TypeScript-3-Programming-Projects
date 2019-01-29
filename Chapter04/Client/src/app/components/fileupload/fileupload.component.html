@@ -1,3 +1,19 @@
-<p>
-  fileupload works!
-</p>
+<div class="example-container">
+  <h2 mat-dialog-title>Choose image</h2>
+  <mat-dialog-content>
+    <h3>{{message}}</h3>
+    <input #fileUpload type="file" accept="image/*" (change)="onImageSelected(fileUpload.files)" />
+    <br />
+    <mat-form-field>
+      <input matInput placeholder="Add tags" formControlName="tags" />
+    </mat-form-field>
+    <br />
+    <mat-form-field>
+      <input matInput placeholder="Description" formControlName="description" />
+    </mat-form-field>
+  </mat-dialog-content>
+  <mat-dialog-actions>
+    <button class="mat-raised-button mat-primary" *ngIf="imageSource">Save</button>
+    <button class="mat-raised-button" mat-dialog-close>Cancel</button>
+  </mat-dialog-actions>
+</div>

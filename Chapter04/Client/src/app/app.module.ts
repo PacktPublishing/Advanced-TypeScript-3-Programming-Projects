@@ -4,13 +4,18 @@ import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LayoutModule } from '@angular/cdk/layout';
-import { MatToolbarModule, MatButtonModule, MatSidenavModule, MatIconModule, MatListModule } from '@angular/material';
+import { MatToolbarModule, MatButtonModule, MatSidenavModule, MatIconModule, MatListModule, MatDialogModule, 
+  MatInputModule } from '@angular/material';
 import { FileuploadComponent } from './components/fileupload/fileupload.component';
+import { FlexLayoutModule } from '@angular/flex-layout';
+import { PageBodyComponent } from './components/page-body/page-body.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
     AppComponent,
-    FileuploadComponent
+    FileuploadComponent,
+    PageBodyComponent
   ],
   imports: [
     BrowserModule,
@@ -20,9 +25,16 @@ import { FileuploadComponent } from './components/fileupload/fileupload.componen
     MatButtonModule,
     MatSidenavModule,
     MatIconModule,
-    MatListModule
+    MatListModule,
+    MatDialogModule, // Dialog support
+    FlexLayoutModule,
+    HttpClientModule,
+    MatInputModule
   ],
   providers: [],
+  entryComponents: [
+    FileuploadComponent
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
