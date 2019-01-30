@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
-import { MatDialog, MatDialogRef } from '@angular/material';
+import { MatDialog, MatDialogRef, MatDialogConfig } from '@angular/material';
 import { FileuploadComponent } from './components/fileupload/fileupload.component';
+import { AddImageService } from './services/add-image.service';
 
 @Component({
   selector: 'atp-root',
@@ -9,11 +10,18 @@ import { FileuploadComponent } from './components/fileupload/fileupload.componen
 })
 export class AppComponent {
   private dialogRef: MatDialogRef<FileuploadComponent>;
-  constructor(private dialog: MatDialog) {
+  constructor(private dialog: MatDialog, private addImage: AddImageService) {
 
   }
 
   public ImportImage(): void {
-    this.dialogRef = this.dialog.open(FileuploadComponent);
+    const config = new MatDialogConfig();
+    config.disableClose = true;
+    config.autoFocus = true;
+    config.width = '500px';
+    this.dialogRef = this.dialog.open(FileuploadComponent, config);
+    this.dialogRef.afterClosed().subscribe(r => {
+      this.addImage.add(r);
+    });
   }
 }

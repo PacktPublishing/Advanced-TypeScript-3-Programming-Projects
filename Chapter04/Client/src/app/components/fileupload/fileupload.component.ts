@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { FilePreviewService } from 'src/app/services/file-preview-service.service';
+import { MatDialogRef } from '@angular/material';
+import { FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'atp-fileupload',
@@ -10,10 +12,13 @@ import { FilePreviewService } from 'src/app/services/file-preview-service.servic
 export class FileuploadComponent implements OnInit {
 
   private selectedFile: File = null;
-  protected imageSource: any;
+  protected imageSource: string | ArrayBuffer;
   protected message: any;
+  protected form: FormGroup;
 
-  constructor(private client: HttpClient, private preview: FilePreviewService) { }
+  constructor(
+    private dialog: MatDialogRef<FileuploadComponent>,
+    private preview: FilePreviewService) { }
 
   ngOnInit() {
   }
@@ -28,9 +33,12 @@ export class FileuploadComponent implements OnInit {
 
   public onLoad(): void {
     const formData = new FormData();
-    formData.append('img', this.selectedFile, this.selectedFile.name);
     // this.client.post('http://localhost:3000/', formData).subscribe(res => {
     //   console.log(res);
     // });
+  }
+
+  public Save(): void {
+    this.dialog.close(this.imageSource);
   }
 }

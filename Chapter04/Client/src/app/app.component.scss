@@ -1,12 +1,11 @@
-.img {
-  width: 100%;
-  margin-bottom: 18%;
+>>> body {
+  margin: 0;
 }
-.card-picture {
-  width: 23%;
-  margin-bottom: 2%;
+
+main {
+  margin: 30px;
 }
-.container {
-  min-height: 100%;
-  width: 100%;
+
+.toolbar-filler {
+  flex: 1 1 auto
 }

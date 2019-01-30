@@ -1,8 +1,8 @@
-.example-container {
-  display: flex;
-  flex-direction: column;
+.mat-form-field {
+  display: block;
 }
 
-.example-container > * {
-  width: 100%;
+textarea {
+  height: 100px;
+  resize: vertical;
 }

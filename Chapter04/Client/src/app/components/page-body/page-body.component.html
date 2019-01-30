@@ -1,12 +1,10 @@
-  <div fxFlex="20%">
-    <img mat-card-image class="img" src="https://d2lm6fxwu08ot6.cloudfront.net/img-thumbs/960w/8V46UZCS0V.jpg">
-  </div>
-  <div fxFlex="20%">
-    <img mat-card-image class="img" src="https://d2lm6fxwu08ot6.cloudfront.net/img-thumbs/960w/LTLE4QGRVQ.jpg">
-  </div>
-  <div fxFlex="20%">
-    <img mat-card-image class="img" src="https://d2lm6fxwu08ot6.cloudfront.net/img-thumbs/960w/R926LU1YEA.jpg">
-  </div>
-  <div fxFlex="20%">
-    <img mat-card-image class="img" src="https://d2lm6fxwu08ot6.cloudfront.net/img-thumbs/960w/U9PP3KXXY2.jpg">
-  </div>
+<div fxLayout="row wrap" fxLayout.xs="column" fxLayoutWrap fxLayoutGap="1%" fxLayoutAlign="left">
+  <mat-card class="picture-card-layout" *ngFor="let picture of Pictures">
+    <mat-card-title fxLayout.gt-xs="row" fxLayout.xs="column">
+      <span fxFlex="80%">Title</span>
+      <mat-icon fxFlex="10%">mode_edit</mat-icon>
+      <mat-icon fxFlex="10%">delete</mat-icon>
+    </mat-card-title>
+    <img mat-card-image [src]="picture">
+  </mat-card>
+</div>

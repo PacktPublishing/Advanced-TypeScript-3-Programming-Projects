@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { AddImageService } from 'src/app/services/add-image.service';
 
 @Component({
   selector: 'atp-page-body',
@@ -7,9 +8,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PageBodyComponent implements OnInit {
 
-  constructor() { }
-
-  ngOnInit() {
+  Pictures: Array<string|ArrayBuffer>;
+  constructor(private addImage: AddImageService) {
+    this.Pictures = new Array<string|ArrayBuffer>();
   }
 
+  ngOnInit() {
+    this.addImage.context.subscribe(message => {
+      if (!message) {
+        return;
+      }
+      this.Pictures.push(message);
+    });
+  }
 }
