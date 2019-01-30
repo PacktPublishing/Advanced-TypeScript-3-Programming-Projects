@@ -4,16 +4,16 @@
     <button type="button" md-button (click)="fileUpload.click()">Upload</button>
   <input hidden #fileUpload type="file" accept="image/*" (change)="onImageSelected(fileUpload.files)" />
   <div>
-    <img src="{{imageSource}}" height="100" *ngIf="imageSource" />
+    <img src="{{imageSource.Image}}" height="100" *ngIf="imageSource" />
   </div>
   <mat-form-field>
-    <input matInput placeholder="Add tags" formControlName="tags" />
+    <input matInput placeholder="Add tags" formControlName="tags" (input)="updateTags($event)" />
   </mat-form-field>
   <mat-form-field>
-    <input matInput placeholder="Description" formControlName="description" />
+    <input matInput placeholder="Description" formControlName="description" (input)="updateDescription($event)" />
   </mat-form-field>
 </mat-dialog-content>
 <mat-dialog-actions>
-  <button class="mat-raised-button mat-primary" *ngIf="imageSource" (click)="Save()">Save</button>
+  <button class="mat-raised-button mat-primary" (click)="Save()">Save</button>
   <button class="mat-raised-button" mat-dialog-close>Cancel</button>
 </mat-dialog-actions>

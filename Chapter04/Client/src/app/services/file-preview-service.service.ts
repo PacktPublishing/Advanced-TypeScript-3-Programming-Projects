@@ -1,7 +1,9 @@
 import { Injectable } from '@angular/core';
+import { ImageType, IPictureModel, PictureModel } from '../types';
 
-async function PreviewFile(files: any): Promise<string | ArrayBuffer> {
+async function PreviewFile(files: any): Promise<IPictureModel> {
   return await new Promise((resolve, reject) => {
+    const imageModel: IPictureModel = new PictureModel();
     if (files.length === 0) {
       return;
     }
@@ -10,11 +12,13 @@ async function PreviewFile(files: any): Promise<string | ArrayBuffer> {
       reject(`The file is not an image file.`);
       return;
     }
+    imageModel.Name = file.name;
     const reader = new FileReader();
-    reader.readAsDataURL(file);
     reader.onload = (evt) => {
-      resolve(reader.result);
+      imageModel.Image = reader.result;
+      resolve(imageModel);
     };
+    reader.readAsDataURL(file);
   });
 }
 @Injectable({
@@ -22,8 +26,8 @@ async function PreviewFile(files: any): Promise<string | ArrayBuffer> {
 })
 export class FilePreviewService {
 
-  public async Preview(files: any): Promise<string | ArrayBuffer> {
-    const image = await PreviewFile(files);
-    return image;
+  public async Preview(files: any): Promise<IPictureModel> {
+    const imageModel = await PreviewFile(files);
+    return imageModel;
   }
 }
