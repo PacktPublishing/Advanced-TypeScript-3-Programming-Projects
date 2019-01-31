@@ -10,6 +10,7 @@ import { FileuploadComponent } from './components/fileupload/fileupload.componen
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { PageBodyComponent } from './components/page-body/page-body.component';
 import { HttpClientModule } from '@angular/common/http';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import { HttpClientModule } from '@angular/common/http';
     FlexLayoutModule,
     HttpClientModule,
     MatInputModule,
-    MatCardModule
+    MatCardModule,
+    FormsModule, // Needed for two way databinding support. Before we [(ngModel)], we need this import
   ],
   providers: [],
   entryComponents: [

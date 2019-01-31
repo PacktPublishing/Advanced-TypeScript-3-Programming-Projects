@@ -1,16 +1,16 @@
 <h2 mat-dialog-title>Choose image</h2>
 <mat-dialog-content>
   <h3 *ngIf="message">{{message}}</h3>
-    <button type="button" md-button (click)="fileUpload.click()">Upload</button>
+  <button class="mat-raised-button mat-accent" md-button (click)="fileUpload.click()">Upload</button>
   <input hidden #fileUpload type="file" accept="image/*" (change)="onImageSelected(fileUpload.files)" />
   <div>
     <img src="{{imageSource.Image}}" height="100" *ngIf="imageSource" />
   </div>
   <mat-form-field>
-    <input matInput placeholder="Add tags" formControlName="tags" (input)="updateTags($event)" />
+    <input type="text" matInput placeholder="Add tags" [(ngModel)]="tags" />
   </mat-form-field>
   <mat-form-field>
-    <input matInput placeholder="Description" formControlName="description" (input)="updateDescription($event)" />
+    <input matInput placeholder="Description" [(ngModel)]="description" />
   </mat-form-field>
 </mat-dialog-content>
 <mat-dialog-actions>
