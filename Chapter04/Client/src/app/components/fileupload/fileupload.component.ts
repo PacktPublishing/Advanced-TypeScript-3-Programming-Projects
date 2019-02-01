@@ -24,7 +24,7 @@ export class FileuploadComponent implements OnInit {
   ngOnInit() {
   }
 
-  public onImageSelected(files: any): void {
+  public OnImageSelected(files: any): void {
     this.preview.Preview(files).then(r => {
       this.imageSource = r;
     }).catch(r => {
@@ -32,17 +32,9 @@ export class FileuploadComponent implements OnInit {
     });
   }
 
-  protected updateTags(event: any): void {
-    this.tags = event.target.value;
-  }
-
-  protected updateDescription(event: any): void {
-    this.description = event.target.value;
-  }
-
   public Save(): void {
     this.imageSource.Description = this.description;
-    this.imageSource.Tags = this.tags.split(` `);
+    this.imageSource.Tags = this.tags;
     this.dialog.close(this.imageSource);
   }
 }

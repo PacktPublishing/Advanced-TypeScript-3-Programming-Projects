@@ -2,7 +2,7 @@
 <mat-dialog-content>
   <h3 *ngIf="message">{{message}}</h3>
   <button class="mat-raised-button mat-accent" md-button (click)="fileUpload.click()">Upload</button>
-  <input hidden #fileUpload type="file" accept="image/*" (change)="onImageSelected(fileUpload.files)" />
+  <input hidden #fileUpload type="file" accept="image/*" (change)="OnImageSelected(fileUpload.files)" />
   <div>
     <img src="{{imageSource.Image}}" height="100" *ngIf="imageSource" />
   </div>
