@@ -20,7 +20,6 @@ export class TransferDataService {
       })
     };
     this.client.get<string[]>('http://localhost:3000/get/', httpOptions).subscribe(pic => {
-      console.log(pic);
       httpOptions = {
         headers: new HttpHeaders({
           'Content-Type': 'application/json',
