@@ -2,7 +2,7 @@
   "name": "server",
   "version": "1.0.0",
   "description": "",
-  "main": "server.js",
+  "main": "AdvancedTypeScriptProjectsChapter4.js",
   "scripts": {
     "start": "nodemon dist/AdvancedTypeScriptProjectsChapter4.js",
     "build": "tsc"

@@ -9,7 +9,7 @@ import { AddImageService } from './services/add-image.service';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  private dialogRef: MatDialogRef<FileuploadComponent>;
+  private dialogRef: MatDialogRef<FileuploadComponent> | null = null;
   constructor(private dialog: MatDialog, private addImage: AddImageService) {
 
   }
@@ -21,7 +21,9 @@ export class AppComponent {
     config.width = '500px';
     this.dialogRef = this.dialog.open(FileuploadComponent, config);
     this.dialogRef.afterClosed().subscribe(r => {
-      this.addImage.add(r);
+      if (r) {
+        this.addImage.add(r);
+      }
     });
   }
 }
