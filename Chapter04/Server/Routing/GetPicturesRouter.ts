@@ -1,17 +1,14 @@
-import { Router } from "./Router";
+import { IRouter } from "./Router";
 import { Picture } from "../Database";
-export class GetPicturesRouter extends Router {
+import { Response } from "express";
+export class GetPicturesRouter implements IRouter {
   public AddRoute(route: any): void {
-    route.get('/get/', (request: Request, response: any) => {
+    route.get('/get/', (request: Request, response: Response) => {
       Picture.distinct("_id", (err, picture) => {
         if (err) {
           response.send(err);
         }
-        const results: string[] = new Array<string>();
-        picture.forEach(pic => {
-          results.push(pic);
-        });
-        response.send(results);
+        response.send(picture);
       });
     });
   }

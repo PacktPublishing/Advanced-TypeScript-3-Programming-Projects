@@ -1,8 +1,10 @@
-import { Router } from "./Router";
+import { IRouter } from "./Router";
 import { Picture } from "../Database";
-export class FindByIdRouter extends Router {
+import { Request, Response } from "express";
+
+export class FindByIdRouter implements IRouter {
   public AddRoute(route: any): void {
-    route.get('/id/:id', (request: any, response: any) => {
+    route.get('/id/:id', (request: Request, response: Response) => {
       Picture.findOne({ _id: request.params.id }, '-_id', (err, picture) => {
         if (err) {
           response.send(err);

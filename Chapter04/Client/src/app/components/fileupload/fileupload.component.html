@@ -14,6 +14,6 @@
   </mat-form-field>
 </mat-dialog-content>
 <mat-dialog-actions>
-  <button class="mat-raised-button mat-primary" (click)="Save()">Save</button>
+  <button class="mat-raised-button mat-primary" (click)="Save()" *ngIf="imageSource.Image">Save</button>
   <button class="mat-raised-button" mat-dialog-close>Cancel</button>
 </mat-dialog-actions>

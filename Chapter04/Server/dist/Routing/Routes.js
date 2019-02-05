@@ -10,7 +10,6 @@ class Routes {
         this.routingEngine = routingEngine;
     }
     AddRoutes() {
-        console.log(`Add routes called`);
         this.routingEngine.Add(AddRouter_1.AddPictureRouter, this.router);
         this.routingEngine.Add(GetPicturesRouter_1.GetPicturesRouter, this.router);
         this.routingEngine.Add(FindByIdRouter_1.FindByIdRouter, this.router);

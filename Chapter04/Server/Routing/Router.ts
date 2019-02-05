@@ -1,3 +1,3 @@
-export abstract class Router {
-    public abstract AddRoute(route: any): void;
+export interface IRouter {
+    AddRoute(route: any): void;
 }
