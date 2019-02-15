@@ -12,13 +12,6 @@ export abstract class Server {
 
     public WithCorsSupport(): Server {
         this.app.use(cors());
-        this.app.use(function(req: any, res: any, next: any) {
-            res.setHeader(`Access-Control-Allow-Origin`, `http://localhost:4200`);
-            res.setHeader(`Access-Control-Allow-Methods`, `POST`);
-            res.setHeader(`Access-Control-Allow-Headers`, `X-Requested-With,content-type`);
-            res.setHeader(`Access-Control-Allow-Credentials`, true);
-            next();
-        });
         return this;
     }
 

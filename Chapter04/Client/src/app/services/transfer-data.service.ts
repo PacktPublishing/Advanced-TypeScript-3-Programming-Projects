@@ -13,18 +13,17 @@ export class TransferDataService {
   }
 
   public Initialize(): void {
-    this.SubscribeToContextChanges();
-    let httpOptions = {
+    this.SubscribeToAddImageContextChanges();
+    this.LoadImagesWithSubscription();
+  }
+
+  private LoadImagesWithSubscription() {
+    const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/text',
       })
     };
     this.client.get<string[]>('http://localhost:3000/get/', httpOptions).subscribe(pic => {
-      httpOptions = {
-        headers: new HttpHeaders({
-          'Content-Type': 'application/json',
-        })
-      };
       pic.forEach(img => {
         this.client.get<IPictureModel>('http://localhost:3000/id/' + img).subscribe(pic1 => {
           if (pic1 !== null) {
@@ -35,7 +34,7 @@ export class TransferDataService {
     });
   }
 
-  private SubscribeToContextChanges() {
+  private SubscribeToAddImageContextChanges() {
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',

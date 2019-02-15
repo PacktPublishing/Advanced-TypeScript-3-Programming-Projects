@@ -16,7 +16,8 @@
     "cors": "^2.8.5",
     "express": "^4.16.4",
     "mongoose": "^5.4.8",
-    "multer": "^1.4.1"
+    "multer": "^1.4.1",
+    "npm": "^6.7.0"
   },
   "devDependencies": {
     "@types/body-parser": "^1.17.0",
