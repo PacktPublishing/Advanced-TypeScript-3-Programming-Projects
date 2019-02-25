@@ -1,0 +1,10 @@
+<div fxLayout="row wrap" fxLayout.xs="column" fxLayoutWrap fxLayoutGap="1%" fxLayoutAlign="left">
+  <mat-card class="tasks-card-layout" *ngFor="let task of tasks | async">
+    <mat-card-title fxLayout.gt-xs="row" fxLayout.xs="column">
+      <span fxFlex="90%">{{task.Title}}</span>
+      <span fxFlex="5%"><mat-icon>edit</mat-icon></span>
+      <span fxFlex="5%"><mat-icon>delete</mat-icon></span>
+    </mat-card-title>
+    <p>{{task.Description}}</p>
+  </mat-card>
+</div>
