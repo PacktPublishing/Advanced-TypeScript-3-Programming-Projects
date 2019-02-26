@@ -4,6 +4,8 @@ import { Resolver } from "type-graphql";
 import { TodoItem } from "./TodoItem";
 import { todoSample } from "../apolloserver";
 import { TodoItemInput } from "./TodoItemInput";
+import { Guid } from "guid-typescript";
+import { canNotDefineSchemaWithinExtensionMessage } from "graphql/validation/rules/LoneSchemaDefinition";
 
 @Resolver(of => TodoItem)
 export class TodoItemResolver implements ResolverInterface<TodoItem> {
@@ -17,23 +19,38 @@ export class TodoItemResolver implements ResolverInterface<TodoItem> {
 
   @Query(returns => [TodoItem], { description: "Get all the TodoItems" })
   async TodoItems(): Promise<TodoItem[]> {
-    console.log(`Here`);
     return await this.items;
   }
 
   @Mutation(returns => TodoItem)
   async Add(@Arg("TodoItem") todoItemInput: TodoItemInput): Promise<TodoItem> {
-    console.log(`Adding the server side`);
     const todoItem = new TodoItem();
-    todoItem.Id = todoItemInput.Id;
+    todoItem.Id = Guid.create().toString();
     todoItem.CreationDate = todoItemInput.CreationDate;
     todoItem.DueDate = todoItemInput.DueDate;
     todoItem.Description = todoItemInput.Description;
     todoItem.Title = todoItemInput.Title;
-    console.log(`here I am ${todoItem.Title}`);
     await this.items.push(todoItem);
-    console.log(todoItem.Title);
     return todoItem;
+  }
+
+  @Mutation()
+  Remove(@Arg("Id") id: string) : boolean {
+    const index = this.items.findIndex(x => x.Id === id);
+    if (!index || index < 0) {
+      return false;
+    }
+    this.items.splice(index, 1);
+    return true;
+  }
+
+  @Query(returns => [TodoItem], { description: "Get items past their due date"})
+  async OverdueTodoItems() : Promise<TodoItem[]> {
+    let collection = this.items;
+    if(collection) {
+      collection = await collection.filter(x => x.DueDate && x.DueDate < new Date());
+    }
+    return collection;
   }
 
   @FieldResolver()

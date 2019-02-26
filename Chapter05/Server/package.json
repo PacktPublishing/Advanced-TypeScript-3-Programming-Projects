@@ -18,6 +18,7 @@
     "apollo-server-express": "^2.4.0",
     "class-transformer": "^0.2.0",
     "express": "^4.16.4",
+    "guid-typescript": "^1.0.9",
     "nodemon": "^1.18.10",
     "parser": "^0.1.4",
     "reflect-metadata": "^0.1.13",

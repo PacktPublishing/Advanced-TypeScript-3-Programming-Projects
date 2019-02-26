@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { AlltasksComponent } from './components/alltasks/alltasks.component';
 import { AddTaskComponent } from './components/add-task/add-task.component';
+import { OverduetasksComponent } from './components/overduetasks/overduetasks.component';
 
 const routes: Routes = [{
   path: '',
@@ -15,6 +16,10 @@ const routes: Routes = [{
 {
   path: 'add',
   component: AddTaskComponent
+},
+{
+  path: 'overdue',
+  component: OverduetasksComponent
 }];
 
 @NgModule({

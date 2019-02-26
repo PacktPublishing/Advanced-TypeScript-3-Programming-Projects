@@ -1,0 +1,49 @@
+<mat-card class="tasks-card-layout">
+  <mat-card-title fxLayout.gt-xs="row" fxLayout.xs="column">
+    <span fxFlex="80%">
+      <div *ngIf="!InEdit;else editTitle">
+        <span>{{Todo.Title}}</span>
+      </div>
+      <ng-template #editTitle>
+        <mat-form-field>
+          <input type="text" matInput placeholder="Title" value="{{Todo.Title}}" required />
+        </mat-form-field>
+      </ng-template>
+    </span>
+    <span fxFlex="10%">
+      <button mat-icon-button (click)="Edit(true)" *ngIf="!InEdit">
+        <mat-icon>edit</mat-icon>
+      </button>
+    </span>
+    <span fxFlex="10%">
+      <button mat-icon-button (click)="Delete()">
+        <mat-icon>delete</mat-icon>
+      </button>
+    </span>
+  </mat-card-title>
+  <mat-card-content>
+    <div *ngIf="InEdit;else editTemplate">
+      <mat-form-field>
+        <textarea matInput placeholder="Description" required>{{Todo.Description}}</textarea>
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput [matDatepicker]="picker" placeholder="Due date" value="{{Todo.DueDate}}" required>
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
+    </div>
+    <ng-template #editTemplate>
+      <p>{{Todo.Description}}</p>
+      <div *ngIf="Todo.DaysCreated === 0;else olderTemplate">
+        <p>This is a new task</p>
+      </div>
+      <ng-template #olderTemplate>
+        <p>Created {{Todo.DaysCreated}} days ago</p>
+      </ng-template>
+    </ng-template>
+  </mat-card-content>
+  <mat-card-actions>
+    <button mat-button>Complete</button>
+    <button *ngIf="InEdit" mat-button (click)="Edit(false)">Save</button>
+  </mat-card-actions>
+</mat-card>

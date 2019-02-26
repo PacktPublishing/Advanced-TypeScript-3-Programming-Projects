@@ -1,19 +1,17 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
-import { Apollo } from 'apollo-angular';
-
-import gql from 'graphql-tag';
 import { ITodoItem } from '../../../../../Common/models/TodoItem';
-import { TodoItemQuery } from '../../types/TodoItemQuery';
+import { Apollo } from 'apollo-angular';
+import { TodoItemQuery } from 'src/app/types/TodoItemQuery';
+import gql from 'graphql-tag';
+import { map } from 'rxjs/operators';
 
 @Component({
-  selector: 'atp-alltasks',
-  templateUrl: './alltasks.component.html',
-  styleUrls: ['./alltasks.component.scss']
+  selector: 'atp-overduetasks',
+  templateUrl: './overduetasks.component.html',
+  styleUrls: ['./overduetasks.component.scss']
 })
-
-export class AlltasksComponent implements OnInit {
+export class OverduetasksComponent implements OnInit {
 
   todos: Observable<ITodoItem[]>;
   constructor(private apollo: Apollo) {
@@ -22,7 +20,7 @@ export class AlltasksComponent implements OnInit {
   ngOnInit() {
     this.todos = this.apollo.watchQuery<TodoItemQuery>({
       query: gql`
-        query TodoItems {
+        query OverdueTodoItems {
           TodoItems {
             Id,
             Title,
@@ -36,4 +34,5 @@ export class AlltasksComponent implements OnInit {
     .valueChanges
     .pipe(map(r => r.data.TodoItems));
   }
+
 }

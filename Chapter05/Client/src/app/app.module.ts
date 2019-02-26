@@ -13,14 +13,18 @@ import { InMemoryCache } from 'apollo-cache-inmemory';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatToolbarModule, MatButtonModule, MatSidenavModule, MatIconModule, MatListModule,
   MatInputModule, MatCardModule, MatDatepickerModule } from '@angular/material';
-import { FlexLayoutModule } from '@angular/flex-layout';
+ import { FlexLayoutModule } from '@angular/flex-layout';
 import { AddTaskComponent } from './components/add-task/add-task.component';
+import { TodoCardComponent } from './components/todo-card/todo-card.component';
+import { OverduetasksComponent } from './components/overduetasks/overduetasks.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     AlltasksComponent,
-    AddTaskComponent
+    AddTaskComponent,
+    TodoCardComponent,
+    OverduetasksComponent,
   ],
   imports: [
     BrowserModule,
@@ -41,9 +45,6 @@ import { AddTaskComponent } from './components/add-task/add-task.component';
     MatInputModule,
     MatCardModule,
     MatDatepickerModule,
-  ],
-  exports: [
-    MatDatepickerModule
   ],
   providers: [],
   bootstrap: [AppComponent]
