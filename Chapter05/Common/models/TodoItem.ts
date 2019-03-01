@@ -3,4 +3,5 @@ export interface ITodoItem {
   Title: string;
   Description?: string;
   DueDate?: Date;
+  Completed: boolean;
 }

@@ -5,6 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AlltasksComponent } from './components/alltasks/alltasks.component';
 import {MatNativeDateModule} from '@angular/material';
+import { FormsModule } from '@angular/forms';
 
 import { ApolloModule, Apollo } from 'apollo-angular';
 import { HttpClientModule } from '@angular/common/http';
@@ -29,6 +30,7 @@ import { OverduetasksComponent } from './components/overduetasks/overduetasks.co
   imports: [
     BrowserModule,
     AppRoutingModule,
+    FormsModule,
 
     MatNativeDateModule, // This is needed to make the date picker work
     HttpClientModule,

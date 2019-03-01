@@ -2,6 +2,9 @@ import { Field, ID, ObjectType, Int } from "type-graphql";
 
 @ObjectType({ description: "A single to do" })
 export class TodoItem {
+  constructor() {
+    this.Completed = false;
+  }
   @Field(type=>ID)
   Id: string = "";
 
@@ -19,4 +22,7 @@ export class TodoItem {
 
   @Field(type => Int)
   DaysCreated: number;
+
+  @Field()
+  Completed: boolean;
 }

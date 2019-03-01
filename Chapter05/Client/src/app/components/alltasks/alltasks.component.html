@@ -1,5 +1,6 @@
 <div fxLayout="row wrap" fxLayout.xs="column" fxLayoutWrap fxLayoutGap="1%" fxLayoutAlign="left">
   <atp-todo-card 
-    *ngFor="let todo of todos | async"
-    [Todo]="todo"></atp-todo-card>
+    *ngFor="let todo of todos"
+    [Todo]="todo"
+    (done)="resubscribe($event)"></atp-todo-card>
 </div>

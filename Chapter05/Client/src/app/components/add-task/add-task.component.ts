@@ -13,15 +13,23 @@ export class AddTaskComponent implements OnInit {
 
   constructor(private apollo: Apollo) { }
 
+  Title: string;
+  Description?: string;
+  DueDate: Date;
+  EarliestDate: Date;
+
   ngOnInit() {
+    this.EarliestDate = new Date();
   }
 
-  Add(title: string, description: string, dueDate: Date): void {
-    const input: ITodoItemInput = new TodoItemInput();
-    input.CreationDate = new Date();
-    input.DueDate = dueDate;
-    input.Description = description;
-    input.Title = title;
+  Add(): void {
+    const todo: ITodoItemInput = new TodoItemInput();
+    todo.Completed = false;
+    todo.Id = '';
+    todo.CreationDate = new Date();
+    todo.Title = this.Title;
+    todo.Description = this.Description;
+    todo.DueDate = this.DueDate;
 
     this.apollo.mutate({
       mutation: gql`
@@ -31,7 +39,7 @@ export class AddTaskComponent implements OnInit {
           }
         }
       `, variables: {
-        input: input
+        input: todo
       }
     }).subscribe();
 

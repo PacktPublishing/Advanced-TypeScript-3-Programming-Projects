@@ -6,7 +6,7 @@
       </div>
       <ng-template #editTitle>
         <mat-form-field>
-          <input type="text" matInput placeholder="Title" value="{{Todo.Title}}" required />
+          <input type="text" matInput placeholder="Title" [(ngModel)]="Todo.Title" required />
         </mat-form-field>
       </ng-template>
     </span>
@@ -24,10 +24,10 @@
   <mat-card-content>
     <div *ngIf="InEdit;else editTemplate">
       <mat-form-field>
-        <textarea matInput placeholder="Description" required>{{Todo.Description}}</textarea>
+        <textarea matInput placeholder="Description" [(ngModel)]="Todo.Description" required></textarea>
       </mat-form-field>
       <mat-form-field>
-        <input matInput [matDatepicker]="picker" placeholder="Due date" value="{{Todo.DueDate}}" required>
+        <input matInput [min]="EarliestDate" [matDatepicker]="picker" placeholder="Due date" [(ngModel)]="Todo.DueDate" required>
         <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
         <mat-datepicker #picker></mat-datepicker>
       </mat-form-field>

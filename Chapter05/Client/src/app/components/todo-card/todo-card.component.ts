@@ -2,6 +2,7 @@ import { Component, OnInit, Input, Output } from '@angular/core';
 import { ITodoItem } from '../../../../../Common/models/TodoItem';
 import { Apollo } from 'apollo-angular';
 import gql from 'graphql-tag';
+import { EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'atp-todo-card',
@@ -10,9 +11,14 @@ import gql from 'graphql-tag';
 })
 export class TodoCardComponent implements OnInit {
   private inEdit = false;
-  constructor(private apollo: Apollo) { }
+  EarliestDate: Date;
+
+  constructor(private apollo: Apollo) {
+    this.EarliestDate = new Date();
+  }
 
   @Input() Todo: ITodoItem;
+  @Output() done: EventEmitter<string> = new EventEmitter<string>();
 
   Edit(inEdit: boolean) {
     this.inEdit = inEdit;
@@ -22,8 +28,11 @@ export class TodoCardComponent implements OnInit {
     return this.inEdit;
   }
 
+  Save() {
+    // 1
+  }
+
   Delete() {
-    console.log(this.Todo.Id);
     this.apollo.mutate({
       mutation: gql`
       mutation Remove($Id: String!) {
@@ -32,9 +41,8 @@ export class TodoCardComponent implements OnInit {
       `, variables: {
         Id: this.Todo.Id
       }
-    });
-    // Reset the edit state.
-    this.Edit(false);
+    }).subscribe();
+    this.done.emit(this.Todo.Id);
   }
 
   ngOnInit() {

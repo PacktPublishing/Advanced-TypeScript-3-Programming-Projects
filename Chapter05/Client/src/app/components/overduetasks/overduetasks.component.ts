@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output } from '@angular/core';
 import { Observable } from 'rxjs';
 import { ITodoItem } from '../../../../../Common/models/TodoItem';
 import { Apollo } from 'apollo-angular';
-import { TodoItemQuery } from 'src/app/types/TodoItemQuery';
+import { TodoItemQuery, OverdueTodoItemQuery } from 'src/app/types/TodoItemQuery';
 import gql from 'graphql-tag';
 import { map } from 'rxjs/operators';
 
@@ -13,15 +13,15 @@ import { map } from 'rxjs/operators';
 })
 export class OverduetasksComponent implements OnInit {
 
-  todos: Observable<ITodoItem[]>;
+  todos: ITodoItem[] = new Array<ITodoItem>();
   constructor(private apollo: Apollo) {
   }
 
   ngOnInit() {
-    this.todos = this.apollo.watchQuery<TodoItemQuery>({
+    const todos = this.apollo.query<OverdueTodoItemQuery>({
       query: gql`
-        query OverdueTodoItems {
-          TodoItems {
+        query ItemsQuery {
+          OverdueTodoItems {
             Id,
             Title,
             Description,
@@ -30,9 +30,18 @@ export class OverduetasksComponent implements OnInit {
           }
         }
       `
-    })
-    .valueChanges
-    .pipe(map(r => r.data.TodoItems));
+    });
+
+    todos.subscribe(todo => {
+      console.log(todo.data);
+      todo.data.OverdueTodoItems.forEach(x => {
+        this.todos.push(x);
+      });
+    });
   }
 
+  resubscribe = (event) => {
+    const index = this.todos.findIndex(x => x.Id === event);
+    this.todos.splice(index, 1);
+  }
 }

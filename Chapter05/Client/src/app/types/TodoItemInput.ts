@@ -5,4 +5,5 @@ export class TodoItemInput implements ITodoItemInput {
   Description?: string;
   DueDate: Date;
   CreationDate: Date;
+  Completed: boolean;
 }

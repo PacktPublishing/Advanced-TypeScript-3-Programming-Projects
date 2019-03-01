@@ -15,14 +15,14 @@ import { TodoItemQuery } from '../../types/TodoItemQuery';
 
 export class AlltasksComponent implements OnInit {
 
-  todos: Observable<ITodoItem[]>;
+  todos: ITodoItem[] = new Array<ITodoItem>();
   constructor(private apollo: Apollo) {
   }
 
   ngOnInit() {
-    this.todos = this.apollo.watchQuery<TodoItemQuery>({
+    const todos = this.apollo.watchQuery<TodoItemQuery>({
       query: gql`
-        query TodoItems {
+        query ItemsQuery {
           TodoItems {
             Id,
             Title,
@@ -35,5 +35,16 @@ export class AlltasksComponent implements OnInit {
     })
     .valueChanges
     .pipe(map(r => r.data.TodoItems));
+
+    todos.subscribe(todo => {
+      todo.forEach(x => {
+        this.todos.push(x);
+      });
+    });
+  }
+
+  resubscribe = (event) => {
+    const index = this.todos.findIndex(x => x.Id === event);
+    this.todos.splice(index, 1);
   }
 }
