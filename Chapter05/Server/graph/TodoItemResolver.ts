@@ -88,7 +88,7 @@ export class TodoItemResolver implements ResolverInterface<TodoItem> {
     const localCollection = new Array<TodoItem>();
     const testDate = new Date();
     await Prefill.Instance.Items.forEach(x => {
-      if (x.DueDate < testDate) {
+      if (x.DueDate < testDate && !x.Completed) {
         localCollection.push(x);
       }
     });

@@ -28,7 +28,8 @@ export class AlltasksComponent implements OnInit {
             Title,
             Description,
             DaysCreated,
-            DueDate
+            DueDate,
+            Completed
           }
         }
       `

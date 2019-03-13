@@ -25,7 +25,8 @@ export class OverduetasksComponent implements OnInit {
             Title,
             Description,
             DaysCreated,
-            DueDate
+            DueDate,
+            Completed
           }
         }
       `

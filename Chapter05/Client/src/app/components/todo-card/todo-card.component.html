@@ -43,7 +43,9 @@
     </ng-template>
   </mat-card-content>
   <mat-card-actions>
-    <button mat-button *ngIf="!this.Todo.Completed" (click)="Complete()">Complete</button>
+    <span *ngIf="!Todo.Completed">
+      <button mat-button (click)="Complete()">Complete</button>
+    </span>
     <button *ngIf="InEdit" mat-button (click)="Save()">Save</button>
   </mat-card-actions>
 </mat-card>
