@@ -3,6 +3,8 @@ import { ITodoItem } from '../../../../../Common/models/TodoItem';
 import { Apollo } from 'apollo-angular';
 import gql from 'graphql-tag';
 import { EventEmitter } from '@angular/core';
+import { ITodoItemInput } from '../../../../../Common/models/ITodoItemInput';
+import { TodoItemInput } from 'src/app/types/TodoItemInput';
 
 @Component({
   selector: 'atp-todo-card',
@@ -29,7 +31,37 @@ export class TodoCardComponent implements OnInit {
   }
 
   Save() {
-    // 1
+    const todo: ITodoItemInput = new TodoItemInput();
+    todo.Completed = false;
+    todo.CreationDate = new Date();
+    todo.Title = this.Todo.Title;
+    todo.Description = this.Todo.Description;
+    todo.DueDate = this.Todo.DueDate;
+    todo.Id = this.Todo.Id;
+    this.apollo.mutate({
+      mutation: gql`
+        mutation Update($input: TodoItemInput!) {
+          Update(TodoItem: $input)
+        }
+      `, variables: {
+        input: todo
+      }
+    }).subscribe();
+
+    this.Edit(false);
+  }
+
+  Complete() {
+    this.apollo.mutate({
+      mutation: gql`
+      mutation Complete($input: String!) {
+        Complete(Id: $input)
+      }
+      `, variables: {
+        input: this.Todo.Id
+      }
+    }).subscribe();
+    this.Edit(false);
   }
 
   Delete() {

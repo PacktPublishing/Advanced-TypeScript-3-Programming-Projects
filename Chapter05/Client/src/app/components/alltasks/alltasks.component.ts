@@ -43,7 +43,7 @@ export class AlltasksComponent implements OnInit {
     });
   }
 
-  resubscribe = (event) => {
+  resubscribe = (event: string) => {
     const index = this.todos.findIndex(x => x.Id === event);
     this.todos.splice(index, 1);
   }

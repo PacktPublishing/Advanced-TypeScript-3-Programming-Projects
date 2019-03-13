@@ -6,8 +6,8 @@ export class Prefill {
   private readonly dataAccess: TodoDataAccess = new TodoDataAccess();
   private constructor() {
   }
-  public Populate(): void {
-    this.dataAccess.GetAll().then(x => {
+  public async Populate(): Promise<void> {
+    await this.dataAccess.GetAll().then(x => {
       x.forEach(item => {
         const todoItem: TodoItem = new TodoItem();
         todoItem.Id = item.Id;
@@ -18,7 +18,6 @@ export class Prefill {
         todoItem.Title = item.Title;
         this.items.push(todoItem);
       });
-      console.log(`The list is now ${this.items.length} long`)
     }).catch(x => {
       console.log(`Unfortunately, we couldn't retrieve all records ${x}`);
     });

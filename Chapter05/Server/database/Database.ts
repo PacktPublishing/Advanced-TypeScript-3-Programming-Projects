@@ -5,7 +5,7 @@ export class Mongo {
   }
 
   public Connect(): void {
-    mongoose.connect(this.url, { useNewUrlParser: true}, (e:any) => {
+    mongoose.connect(this.url, { useNewUrlParser: true}, (e:unknown) => {
       if (e) {
         console.log(`Unable to connect ` + e);
       } else {

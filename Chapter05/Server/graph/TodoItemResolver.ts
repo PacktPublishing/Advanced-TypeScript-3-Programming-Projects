@@ -33,25 +33,42 @@ export class TodoItemResolver implements ResolverInterface<TodoItem> {
     todoItem.Title = todoItemInput.Title;
     todoItem.Completed = false;
     await Prefill.Instance.Items.push(todoItem);
-    const schema: ITodoSchema = <ITodoSchema>{
-      Id: todoItem.Id,
-      CreationDate: todoItem.CreationDate,
-      DueDate: todoItem.DueDate,
-      Description: todoItem.Description,
-      Title:todoItem.Title,
-      Completed: false
-    }
+    const schema: ITodoSchema = this.CreateTodoSchema(todoItem)
     this.dataAccess.Add(schema);
     return todoItem;
   }
 
+  private CreateTodoSchema(todoItem: TodoItem): ITodoSchema {
+    return <ITodoSchema>{
+      Id: todoItem.Id,
+      CreationDate: todoItem.CreationDate,
+      DueDate: todoItem.DueDate,
+      Description: todoItem.Description,
+      Title: todoItem.Title,
+      Completed: false
+    };
+  }
+
   @Mutation(() => Boolean!)
-  async Update(@Arg("TodoItem") todoItemInput: TodoItemInput, @Arg("Id") id: string): Promise<boolean> {
-    const item: TodoItem = await Prefill.Instance.Items.find(x => x.Id === id);
+  async Update(@Arg("TodoItem") todoItemInput: TodoItemInput): Promise<boolean> {
+    const item: TodoItem = await Prefill.Instance.Items.find(x => x.Id === todoItemInput.Id);
     if (!item) return false;
     item.Title = todoItemInput.Title;
     item.Description = todoItemInput.Description;
     item.DueDate = todoItemInput.DueDate;
+    const schema: ITodoSchema = this.CreateTodoSchema(item);
+    this.dataAccess.Update(item.Id, schema);
+    return true;
+  }
+
+  @Mutation(() => Boolean!)
+  async Complete(@Arg("Id") id: string) : Promise<boolean> {
+    const item: TodoItem = await Prefill.Instance.Items.find(x => x.Id === id);
+    if (!item) return false;
+    item.Completed = true;
+    const schema: ITodoSchema = this.CreateTodoSchema(item);
+    schema.Completed = item.Completed;
+    this.dataAccess.Update(item.Id, schema);
     return true;
   }
 
@@ -82,15 +99,19 @@ export class TodoItemResolver implements ResolverInterface<TodoItem> {
   DaysCreated(
     @Root() TodoItem: TodoItem
   ): number {
-    const today = new Date();
-    const value = Math.round(this.GetDate(today) - this.GetDate(TodoItem.CreationDate));
+    // This is the equivalent instantiation to the method call.
+    //const args: [Date, Date] = [new Date(), TodoItem.CreationDate];
+    const value = this.GetDateDifference(...[new Date(), TodoItem.CreationDate]);
+
     if (value === 0) {
       return 0;
     }
     return Math.round(value / this.milliSecondsPerDay);
   }
 
-  private GetDate(day: Date): number {
-    return Date.UTC(day.getFullYear(), day.getMonth(), day.getDay());
+  // Uses the Rest parameters Tuple types introduced in TypeScript 3
+  // Note - the signature of this could have been private GetDateDifference(...args: [Date, Date]): number
+  private GetDateDifference<T extends Date[]>(...args: T): number {
+    return Math.round(args[0].valueOf() - args[1].valueOf());
   }
 }

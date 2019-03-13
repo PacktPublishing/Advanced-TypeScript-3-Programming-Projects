@@ -1,5 +1,4 @@
 import { Component, OnInit, Output } from '@angular/core';
-import { Observable } from 'rxjs';
 import { ITodoItem } from '../../../../../Common/models/TodoItem';
 import { Apollo } from 'apollo-angular';
 import { TodoItemQuery, OverdueTodoItemQuery } from 'src/app/types/TodoItemQuery';
@@ -33,14 +32,13 @@ export class OverduetasksComponent implements OnInit {
     });
 
     todos.subscribe(todo => {
-      console.log(todo.data);
       todo.data.OverdueTodoItems.forEach(x => {
         this.todos.push(x);
       });
     });
   }
 
-  resubscribe = (event) => {
+  resubscribe = (event: string) => {
     const index = this.todos.findIndex(x => x.Id === event);
     this.todos.splice(index, 1);
   }

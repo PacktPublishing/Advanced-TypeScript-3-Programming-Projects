@@ -42,6 +42,12 @@ export class AddTaskComponent implements OnInit {
         input: todo
       }
     }).subscribe();
+    this.Reset();
+  }
 
+  private Reset(): void {
+    this.Title = ``;
+    this.Description = ``;
+    this.DueDate = null;
   }
 }

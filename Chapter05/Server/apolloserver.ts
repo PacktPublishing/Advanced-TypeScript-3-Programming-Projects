@@ -21,7 +21,7 @@ export class MyApp {
 
     // GraphQL uses lazy loading. In order to respond to our clients faster, we're going to pre-populate this
     // list.
-    Prefill.Instance.Populate();
+    await Prefill.Instance.Populate();
 
     const server = new ApolloServer({ schema, playground: true });
     await server.listen(3000);
