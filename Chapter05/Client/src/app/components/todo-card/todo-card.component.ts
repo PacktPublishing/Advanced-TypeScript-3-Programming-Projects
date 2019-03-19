@@ -62,6 +62,7 @@ export class TodoCardComponent implements OnInit {
       }
     }).subscribe();
     this.Edit(false);
+    this.Todo.Completed = true;
   }
 
   Delete() {

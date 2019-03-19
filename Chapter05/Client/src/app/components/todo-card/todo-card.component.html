@@ -1,51 +1,74 @@
 <mat-card class="tasks-card-layout">
-  <mat-card-title fxLayout.gt-xs="row" fxLayout.xs="column">
-    <span fxFlex="80%">
-      <div *ngIf="!InEdit;else editTitle">
-        <span>{{Todo.Title}}</span>
-      </div>
-      <ng-template #editTitle>
-        <mat-form-field>
-          <input type="text" matInput placeholder="Title" [(ngModel)]="Todo.Title" required />
-        </mat-form-field>
-      </ng-template>
-    </span>
-    <span fxFlex="10%">
-      <button mat-icon-button (click)="Edit(true)" *ngIf="!InEdit">
-        <mat-icon>edit</mat-icon>
-      </button>
-    </span>
-    <span fxFlex="10%">
-      <button mat-icon-button (click)="Delete()">
-        <mat-icon>delete</mat-icon>
-      </button>
-    </span>
-  </mat-card-title>
-  <mat-card-content>
-    <div *ngIf="InEdit;else editTemplate">
-      <mat-form-field>
-        <textarea matInput placeholder="Description" [(ngModel)]="Todo.Description" required></textarea>
-      </mat-form-field>
-      <mat-form-field>
-        <input matInput [min]="EarliestDate" [matDatepicker]="picker" placeholder="Due date" [(ngModel)]="Todo.DueDate" required>
-        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-        <mat-datepicker #picker></mat-datepicker>
-      </mat-form-field>
-    </div>
-    <ng-template #editTemplate>
-      <p class="descriptionBlock">{{Todo.Description}}</p>
-      <div *ngIf="Todo.DaysCreated === 0;else olderTemplate">
-        <p>This is a new task</p>
-      </div>
-      <ng-template #olderTemplate>
-        <p>Created {{Todo.DaysCreated}} days ago</p>
-      </ng-template>
-    </ng-template>
-  </mat-card-content>
-  <mat-card-actions>
-    <span *ngIf="!Todo.Completed">
-      <button mat-button (click)="Complete()">Complete</button>
-    </span>
-    <button *ngIf="InEdit" mat-button (click)="Save()">Save</button>
-  </mat-card-actions>
+  <div>
+    <form name="form" (ngSubmit)="f.form.valid" #f="ngForm">
+      <mat-card-title fxLayout.gt-xs="row" fxLayout.xs="column">
+        <span fxFlex="80%">
+          <div *ngIf="!InEdit;else editTitle">
+            <span>{{Todo.Title}}</span>
+          </div>
+          <ng-template #editTitle>
+            <mat-form-field>
+              <input type="text" name="Title" matInput placeholder="Title" [(ngModel)]="Todo.Title" #title="ngModel"
+                required />
+            </mat-form-field>
+            <div *ngIf="title.invalid && (title.dirty || title.touched)" class="alert alert-danger">
+              <div *ngIf="title.errors.required">
+                You must add a title.
+              </div>
+            </div>
+          </ng-template>
+        </span>
+        <span fxFlex="10%">
+          <button mat-icon-button (click)="Edit(true)" *ngIf="!InEdit">
+            <mat-icon>edit</mat-icon>
+          </button>
+        </span>
+        <span fxFlex="10%">
+          <button mat-icon-button (click)="Delete()">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </span>
+      </mat-card-title>
+      <mat-card-content>
+        <div *ngIf="InEdit;else displayTemplate">
+          <mat-form-field>
+            <textarea matInput placeholder="Description" [(ngModel)]="Todo.Description" name="description"
+              #description="ngModel" required></textarea>
+          </mat-form-field>
+          <div *ngIf="description.invalid && (description.dirty || description.touched)" class="alert alert-danger">
+            <div *ngIf="description.errors.required">
+              You must add a description.
+            </div>
+          </div>
+          <mat-form-field>
+            <input matInput name="duedate" [min]="EarliestDate" [matDatepicker]="picker" placeholder="Due date"
+              [(ngModel)]="Todo.DueDate" #datepicker="ngModel" required>
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+          </mat-form-field>
+          <div *ngIf="datepicker.invalid && (datepicker.dirty || datepicker.touched)" class="alert alert-danger">
+            <div *ngIf="datepicker.errors.required">
+              You must select a due date.
+            </div>
+          </div>
+        </div>
+        <ng-template #displayTemplate>
+          <p class="descriptionBlock">{{Todo.Description}}</p>
+          <p>Due: {{Todo.DueDate | date}}</p>
+          <div *ngIf="Todo.DaysCreated === 0;else olderTemplate">
+            <p>This is a new task</p>
+          </div>
+          <ng-template #olderTemplate>
+            <p>Created {{Todo.DaysCreated}} days ago</p>
+          </ng-template>
+        </ng-template>
+      </mat-card-content>
+      <mat-card-actions>
+        <span *ngIf="!Todo.Completed">
+          <button mat-button (click)="Complete()">Complete</button>
+        </span>
+        <button *ngIf="InEdit" mat-button class="btn btn-primary" (click)="Save()">Save</button>
+      </mat-card-actions>
+    </form>
+  </div>
 </mat-card>

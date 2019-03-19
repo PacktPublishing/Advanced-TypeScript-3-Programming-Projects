@@ -20,6 +20,7 @@ export class TodoItemResolver implements ResolverInterface<TodoItem> {
 
   @Query(() => [TodoItem], { description: "Get all the TodoItems" })
   async TodoItems(): Promise<TodoItem[]> {
+    await Prefill.Instance.Populate();
     return await Prefill.Instance.Items;
   }
 
@@ -35,6 +36,7 @@ export class TodoItemResolver implements ResolverInterface<TodoItem> {
     await Prefill.Instance.Items.push(todoItem);
     const schema: ITodoSchema = this.CreateTodoSchema(todoItem)
     this.dataAccess.Add(schema);
+    await Prefill.Instance.Populate();
     return todoItem;
   }
 
@@ -58,22 +60,25 @@ export class TodoItemResolver implements ResolverInterface<TodoItem> {
     item.DueDate = todoItemInput.DueDate;
     const schema: ITodoSchema = this.CreateTodoSchema(item);
     this.dataAccess.Update(item.Id, schema);
+    await Prefill.Instance.Populate();
     return true;
   }
 
   @Mutation(() => Boolean!)
   async Complete(@Arg("Id") id: string) : Promise<boolean> {
+    await Prefill.Instance.Populate();
     const item: TodoItem = await Prefill.Instance.Items.find(x => x.Id === id);
     if (!item) return false;
     item.Completed = true;
     const schema: ITodoSchema = this.CreateTodoSchema(item);
-    schema.Completed = item.Completed;
+    schema.Completed = true;
     this.dataAccess.Update(item.Id, schema);
     return true;
   }
 
   @Mutation(() => Boolean!)
-  Remove(@Arg("Id") id: string): boolean {
+  async Remove(@Arg("Id") id: string): Promise<boolean> {
+    await Prefill.Instance.Populate();
     const index = Prefill.Instance.Items.findIndex(x => x.Id === id);
     if (!index || index < 0) {
       return false;
@@ -85,6 +90,7 @@ export class TodoItemResolver implements ResolverInterface<TodoItem> {
 
   @Query(() => [TodoItem], { description: "Get items past their due date" })
   async OverdueTodoItems(): Promise<TodoItem[]> {
+    await Prefill.Instance.Populate();
     const localCollection = new Array<TodoItem>();
     const testDate = new Date();
     await Prefill.Instance.Items.forEach(x => {

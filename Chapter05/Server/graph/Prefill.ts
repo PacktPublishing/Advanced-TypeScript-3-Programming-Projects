@@ -2,13 +2,15 @@ import { TodoItem } from "./TodoItem";
 import { TodoDataAccess } from "../database/TodoDataAccess";
 export class Prefill {
   private static prefill: Prefill;
-  private readonly items: TodoItem[] = new Array<TodoItem>();
+  private items: TodoItem[] = new Array<TodoItem>();
   private readonly dataAccess: TodoDataAccess = new TodoDataAccess();
   private constructor() {
   }
   public async Populate(): Promise<void> {
-    await this.dataAccess.GetAll().then(x => {
-      x.forEach(item => {
+    try {
+      const schema = await this.dataAccess.GetAll();
+      this.items = new Array<TodoItem>();
+      schema.forEach(item => {
         const todoItem: TodoItem = new TodoItem();
         todoItem.Id = item.Id;
         todoItem.Completed = item.Completed;
@@ -18,9 +20,9 @@ export class Prefill {
         todoItem.Title = item.Title;
         this.items.push(todoItem);
       });
-    }).catch(x => {
-      console.log(`Unfortunately, we couldn't retrieve all records ${x}`);
-    });
+    } catch (error) {
+      console.log(`Unfortunately, we couldn't retrieve all records ${error}`);
+    }
   }
   public static get Instance() {
     return this.prefill || (this.prefill = new this());

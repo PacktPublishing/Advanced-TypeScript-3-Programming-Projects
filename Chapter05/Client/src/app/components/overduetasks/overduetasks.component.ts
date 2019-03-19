@@ -1,9 +1,8 @@
 import { Component, OnInit, Output } from '@angular/core';
 import { ITodoItem } from '../../../../../Common/models/TodoItem';
 import { Apollo } from 'apollo-angular';
-import { TodoItemQuery, OverdueTodoItemQuery } from 'src/app/types/TodoItemQuery';
+import { OverdueTodoItemQuery } from 'src/app/types/TodoItemQuery';
 import gql from 'graphql-tag';
-import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'atp-overduetasks',
@@ -33,6 +32,7 @@ export class OverduetasksComponent implements OnInit {
     });
 
     todos.subscribe(todo => {
+      this.todos = new Array<ITodoItem>();
       todo.data.OverdueTodoItems.forEach(x => {
         this.todos.push(x);
       });

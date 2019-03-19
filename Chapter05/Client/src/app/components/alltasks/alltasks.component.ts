@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Apollo } from 'apollo-angular';
 
@@ -16,36 +15,41 @@ import { TodoItemQuery } from '../../types/TodoItemQuery';
 export class AlltasksComponent implements OnInit {
 
   todos: ITodoItem[] = new Array<ITodoItem>();
-  constructor(private apollo: Apollo) {
+  constructor(protected apollo: Apollo) {
   }
 
   ngOnInit() {
-    const todos = this.apollo.watchQuery<TodoItemQuery>({
-      query: gql`
-        query ItemsQuery {
-          TodoItems {
-            Id,
-            Title,
-            Description,
-            DaysCreated,
-            DueDate,
-            Completed
-          }
-        }
-      `
-    })
-    .valueChanges
-    .pipe(map(r => r.data.TodoItems));
-
-    todos.subscribe(todo => {
-      todo.forEach(x => {
-        this.todos.push(x);
-      });
-    });
+    this.subscribe(gql`
+    query ItemsQuery {
+      TodoItems {
+        Id,
+        Title,
+        Description,
+        DaysCreated,
+        DueDate,
+        Completed
+      }
+    }
+  `);
   }
 
   resubscribe = (event: string) => {
     const index = this.todos.findIndex(x => x.Id === event);
     this.todos.splice(index, 1);
+  }
+
+  private subscribe(query: unknown) {
+    const todos = this.apollo.watchQuery<TodoItemQuery>({
+      query: query
+    })
+      .valueChanges
+      .pipe(map(r => r.data.TodoItems));
+
+    todos.subscribe(todo => {
+      this.todos = new Array<ITodoItem>();
+      todo.forEach(x => {
+        this.todos.push(x);
+      });
+    });
   }
 }

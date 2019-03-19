@@ -16,6 +16,7 @@ export class MyApp {
 
     const schema = await buildSchema({
       resolvers: [TodoItemResolver],
+      validate: false,
       emitSchemaFile: path.resolve(__dirname, 'apolloschema.gql')
     });
 
