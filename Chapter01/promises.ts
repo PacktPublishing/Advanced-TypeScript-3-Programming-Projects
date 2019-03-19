@@ -9,7 +9,7 @@
 //     }
 // }
 
-async function ExpensiveWebCall(time : number) : Promise<{}> {
+function ExpensiveWebCall(time : number) : Promise<{}> {
     return new Promise((resolve, reject) => setTimeout(resolve, time));
 }
 class MyWebService {
