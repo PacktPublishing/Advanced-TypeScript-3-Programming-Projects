@@ -55,7 +55,13 @@ export class AppModule {
   constructor(httpLink: HttpLink, apollo: Apollo) {
     apollo.create({
       link: httpLink.create({ uri: 'http://localhost:3000' }),
-      cache: new InMemoryCache()
+      cache: new InMemoryCache(),
+      defaultOptions: {
+        watchQuery: {
+          // To get the data on each get, set the fetchPolicy
+          fetchPolicy: 'network-only'
+        }
+      }
     });
   }
 }
