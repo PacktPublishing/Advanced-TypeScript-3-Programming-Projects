@@ -7,9 +7,10 @@ export class SubscriptionBase {
   todos: ITodoItem[] = new Array<ITodoItem>();
   constructor(private apollo: Apollo) {
   }
-  protected Subscribe<T extends OverdueTodoItemQuery | TodoItemQuery>(gqlQuery: any): Observable<ApolloQueryResult<T>> {
+  protected Subscribe<T extends OverdueTodoItemQuery | TodoItemQuery>(gqlQuery: unknown): Observable<ApolloQueryResult<T>> {
     return this.apollo.query<T>({
-      query: gqlQuery
+      query: gqlQuery,
+      fetchPolicy: 'no-cache'
     });
   }
   resubscribe = (event: string) => {

@@ -13,7 +13,6 @@ import { SubscriptionBase } from '../../types/SubscriptionBase';
 })
 export class OverduetasksComponent extends SubscriptionBase implements OnInit {
 
-  todos: ITodoItem[] = new Array<ITodoItem>();
   constructor(apollo: Apollo) {
     super(apollo);
   }

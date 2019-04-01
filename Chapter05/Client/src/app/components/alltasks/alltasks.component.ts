@@ -15,7 +15,6 @@ import { SubscriptionBase } from 'src/app/types/SubscriptionBase';
 
 export class AlltasksComponent extends SubscriptionBase implements OnInit {
 
-  todos: ITodoItem[] = new Array<ITodoItem>();
   constructor(apollo: Apollo) {
     super(apollo);
   }
