@@ -5,6 +5,7 @@ import { Apollo } from 'apollo-angular';
 import gql from 'graphql-tag';
 import { ITodoItem } from '../../../../../Common/models/TodoItem';
 import { TodoItemQuery } from '../../types/TodoItemQuery';
+import { SubscriptionBase } from 'src/app/types/SubscriptionBase';
 
 @Component({
   selector: 'atp-alltasks',
@@ -12,15 +13,15 @@ import { TodoItemQuery } from '../../types/TodoItemQuery';
   styleUrls: ['./alltasks.component.scss']
 })
 
-export class AlltasksComponent implements OnInit {
+export class AlltasksComponent extends SubscriptionBase implements OnInit {
 
   todos: ITodoItem[] = new Array<ITodoItem>();
-  constructor(protected apollo: Apollo) {
+  constructor(apollo: Apollo) {
+    super(apollo);
   }
 
   ngOnInit() {
-    this.subscribe(gql`
-    query ItemsQuery {
+    this.Subscribe<TodoItemQuery>(gql`query ItemsQuery {
       TodoItems {
         Id,
         Title,
@@ -29,25 +30,9 @@ export class AlltasksComponent implements OnInit {
         DueDate,
         Completed
       }
-    }
-  `);
-  }
-
-  resubscribe = (event: string) => {
-    const index = this.todos.findIndex(x => x.Id === event);
-    this.todos.splice(index, 1);
-  }
-
-  private subscribe(query: unknown) {
-    const todos = this.apollo.watchQuery<TodoItemQuery>({
-      query: query
-    })
-      .valueChanges
-      .pipe(map(r => r.data.TodoItems));
-
-    todos.subscribe(todo => {
+    }`).subscribe(todo => {
       this.todos = new Array<ITodoItem>();
-      todo.forEach(x => {
+      todo.data.TodoItems.forEach(x => {
         this.todos.push(x);
       });
     });
