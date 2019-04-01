@@ -1,11 +1,11 @@
 // Very important - reflect metadata needs to be at the top of the stack of imports
-import "reflect-metadata";
 import { ApolloServer } from "apollo-server";
 import * as path from "path";
 import { buildSchema } from "type-graphql";
 import { TodoItemResolver } from "./graph/TodoItemResolver";
 import { Prefill } from "./graph/Prefill";
 import { Mongo } from "./database/Database";
+import { GraphQLSchema } from "graphql";
 
 export class MyApp {
 
@@ -14,7 +14,7 @@ export class MyApp {
   public async Start(): Promise<void> {
     this.mongo.Connect();
 
-    const schema = await buildSchema({
+    const schema: GraphQLSchema = await buildSchema({
       resolvers: [TodoItemResolver],
       validate: false,
       emitSchemaFile: path.resolve(__dirname, 'apolloschema.gql')

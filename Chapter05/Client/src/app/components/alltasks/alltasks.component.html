@@ -2,5 +2,5 @@
   <atp-todo-card 
     *ngFor="let todo of todos"
     [Todo]="todo"
-    (done)="resubscribe($event)"></atp-todo-card>
+    (deleted)="resubscribe($event)"></atp-todo-card>
 </div>

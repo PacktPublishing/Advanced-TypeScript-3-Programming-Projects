@@ -1,6 +1,7 @@
 import { Component, OnInit, Input, Output } from '@angular/core';
 import { Apollo } from 'apollo-angular';
 import gql from 'graphql-tag';
+import { Guid } from 'guid-typescript';
 import { ITodoItemInput } from '../../../../../Common/models/ITodoItemInput';
 import { TodoItemInput } from 'src/app/types/TodoItemInput';
 
@@ -25,7 +26,7 @@ export class AddTaskComponent implements OnInit {
   Add(): void {
     const todo: ITodoItemInput = new TodoItemInput();
     todo.Completed = false;
-    todo.Id = '';
+    todo.Id = Guid.create().toString();
     todo.CreationDate = new Date();
     todo.Title = this.Title;
     todo.Description = this.Description;

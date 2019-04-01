@@ -20,7 +20,7 @@ export class TodoCardComponent implements OnInit {
   }
 
   @Input() Todo: ITodoItem;
-  @Output() done: EventEmitter<string> = new EventEmitter<string>();
+  @Output() deleted: EventEmitter<string> = new EventEmitter<string>();
 
   Edit(inEdit: boolean) {
     this.inEdit = inEdit;
@@ -75,7 +75,7 @@ export class TodoCardComponent implements OnInit {
         Id: this.Todo.Id
       }
     }).subscribe();
-    this.done.emit(this.Todo.Id);
+    this.deleted.emit(this.Todo.Id);
   }
 
   ngOnInit() {
