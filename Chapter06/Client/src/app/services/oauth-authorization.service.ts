@@ -2,12 +2,12 @@ import {Injectable} from '@angular/core';
 import * as auth0 from 'auth0-js';
 import {Router} from "@angular/router";
 import {Authorization} from "./authorization";
+import {Socket} from "ngx-socket-io";
 
 @Injectable({
   providedIn: 'root'
 })
 export class OauthAuthorizationService {
-
   auth0 = new auth0.WebAuth({
     clientID: 'IvDHHA20ZKx7zvUQWNPrMy15vLTsFxx4',
     domain: 'dev-gdhoxa3c.eu.auth0.com',
@@ -16,8 +16,10 @@ export class OauthAuthorizationService {
     scope: 'openid email'
   });
 
-  private authorization: Authorization = new Authorization();
-  constructor(private router: Router) { }
+  private readonly authorization: Authorization;
+  constructor(private router: Router, private socket: Socket) {
+    this.authorization = new Authorization(socket);
+  }
 
   public Login(): void {
     this.auth0.authorize();
