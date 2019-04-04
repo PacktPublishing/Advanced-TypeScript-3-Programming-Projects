@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {Socket} from "ngx-socket-io";
 
 @Component({
   selector: 'atp-openchat',
@@ -7,9 +8,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class OpenchatComponent implements OnInit {
 
-  constructor() { }
+  private messages:string[] = new Array<string>();
+  constructor(private socket: Socket) { }
 
   ngOnInit() {
+    this.socket.on('userLogOn', (msg:any) => {
+      this.messages.push(`${msg.user} logged on at ${msg.time}`)
+    });
   }
 
+  public get Messages(): string[] { return this.messages; }
 }
