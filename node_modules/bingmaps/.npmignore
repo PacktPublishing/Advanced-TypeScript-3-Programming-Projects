@@ -1,0 +1,18 @@
+# Ignore the git folder
+.git/
+
+# Ignore the build folder which has the NuGet package spec.
+build/
+
+# Ignore the images folder.
+images/
+
+#ignore the unnecessary markdown pages
+CONTRIBUTING.md
+README.md
+
+# Ignore the examples files
+/Example.ts
+
+# npm log
+/npm-debug.log

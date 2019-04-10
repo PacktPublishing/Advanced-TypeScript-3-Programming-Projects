@@ -1,5 +1,4 @@
-import mongoose, {mongo} from "mongoose";
-import {SecuredDatabase} from "./Types";
+import mongoose, {mongo, Schema} from "mongoose";
 
 export function Mongo(connection: string) {
   return function (constructor: Function) {

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {Socket} from "ngx-socket-io";
+import {ChatMessagesService} from "../../services/chat-messages.service";
 
 @Component({
   selector: 'atp-openchat',
@@ -8,14 +8,13 @@ import {Socket} from "ngx-socket-io";
 })
 export class OpenchatComponent implements OnInit {
 
-  private messages:string[] = new Array<string>();
-  constructor(private socket: Socket) { }
+  messages: string[] = [];
+  constructor(private chatMessages: ChatMessagesService) { }
 
   ngOnInit() {
-    this.socket.on('userLogOn', (msg:any) => {
-      this.messages.push(`${msg.user} logged on at ${msg.time}`)
+    this.chatMessages.SecureMessages('secret');
+    this.chatMessages.DefaultMessages().subscribe((msg: string) =>{
+      this.messages.push(msg)
     });
   }
-
-  public get Messages(): string[] { return this.messages; }
 }

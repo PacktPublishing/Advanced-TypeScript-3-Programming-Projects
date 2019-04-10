@@ -37,7 +37,7 @@ export class OauthAuthorizationService {
       if (!err) {
         this.authorization.SetFromAuthorizationResult(authResult);
         window.location.hash = '';
-        this.router.navigate(['/general']);
+        this.router.navigate(['/secret']);
       } else {
         this.router.navigate(['/general']);
         console.log(err);
