@@ -1,4 +1,5 @@
 import {Socket} from "ngx-socket-io";
+import {Log} from "../Types/Logging";
 
 export class Authorization {
 
@@ -8,6 +9,7 @@ export class Authorization {
   public Expired: number;
   public Email: string;
 
+  @Log()
   public Clear(): void {
     this.socket.emit('loggedOff', this.Email);
     this.IdToken = '';
@@ -16,6 +18,7 @@ export class Authorization {
     this.Email = '';
   }
 
+  @Log()
   public SetFromAuthorizationResult(authResult: any): void {
     if (authResult && authResult.accessToken && authResult.idToken) {
       this.IdToken = authResult.idToken;

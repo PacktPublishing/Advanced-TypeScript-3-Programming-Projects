@@ -3,6 +3,7 @@ import * as auth0 from 'auth0-js';
 import {Router} from "@angular/router";
 import {Authorization} from "./authorization";
 import {Socket} from "ngx-socket-io";
+import {Log} from "../Types/Logging";
 
 @Injectable({
   providedIn: 'root'
@@ -21,6 +22,7 @@ export class OauthAuthorizationService {
     this.authorization = new Authorization(socket);
   }
 
+  @Log()
   public Login(): void {
     this.auth0.authorize();
   }
@@ -32,6 +34,7 @@ export class OauthAuthorizationService {
     });
   }
 
+  @Log()
   public CheckAuthentication(): void {
     this.auth0.parseHash((err, authResult) => {
       if (!err) {
@@ -45,6 +48,7 @@ export class OauthAuthorizationService {
     });
   }
 
+  @Log()
   public Renew(): void {
     this.auth0.checkSession({}, (err, authResult) => {
       if (authResult && authResult.accessToken && authResult.idToken) {
