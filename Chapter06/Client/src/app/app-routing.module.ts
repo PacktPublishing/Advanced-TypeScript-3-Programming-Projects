@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import {OpenchatComponent} from "./components/openchat/openchat.component";
 import {GeneralchatComponent} from "./components/generalchat/generalchat.component";
 import {SecretchatComponent} from "./components/secretchat/secretchat.component";
+import {AuthorizationService} from "./services/authorization.service";
 
 const routes: Routes = [{
   path: '',
@@ -16,7 +17,8 @@ const routes: Routes = [{
   component: OpenchatComponent
 }, {
   path: 'secret',
-  component: SecretchatComponent
+  component: SecretchatComponent,
+  canActivate: [AuthorizationService]
 }];
 
 @NgModule({

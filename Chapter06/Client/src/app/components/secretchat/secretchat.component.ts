@@ -15,6 +15,7 @@ export class SecretchatComponent implements OnInit, OnDestroy {
 
   constructor(private chatService: ChatMessagesService) { }
 
+
   ngOnInit() {
     this.chatService.JoinRoom('secret');
     this.subscription = this.chatService.SecureMessages('secret').subscribe((msg: string) =>{

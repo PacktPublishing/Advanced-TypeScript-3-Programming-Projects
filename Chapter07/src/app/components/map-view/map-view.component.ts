@@ -11,7 +11,7 @@ import { EventEmitter, Component, OnInit, ViewChild, Output } from '@angular/cor
   }
 })
 export class MapViewComponent implements OnInit {
-  @ViewChild('myMap') myMap;
+  @ViewChild('myMap') myMap: { nativeElement: string | HTMLElement; };
 
   constructor() { }
 
