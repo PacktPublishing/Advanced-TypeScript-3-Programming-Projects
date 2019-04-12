@@ -1,6 +1,8 @@
 /// <reference path='../../../../node_modules/bingmaps/types/MicrosoftMaps/Microsoft.Maps.All.d.ts' />
 
 import { Component, OnInit } from '@angular/core';
+import { MapEvents } from './MapEvents';
+import { PinsModel } from './PinsModel';
 
 @Component({
     selector: 'atp-mappingcontainer',
@@ -10,6 +12,7 @@ import { Component, OnInit } from '@angular/core';
 export class MappingcontainerComponent implements OnInit {
 
     private map: Microsoft.Maps.Map;
+    private mapEvents: MapEvents;
     constructor() { }
 
     ngOnInit() {
@@ -17,15 +20,6 @@ export class MappingcontainerComponent implements OnInit {
 
     MapLoaded(map: Microsoft.Maps.Map) {
         this.map = map;
-        const center = map.getCenter();
-        console.log(`I have a map`);
-        var pin = new Microsoft.Maps.Pushpin(center, {
-            title: 'Microsoft',
-            subTitle: 'City Center',
-        });
-
-        //Add the pushpin to the map
-        map.entities.push(pin);
+        this.mapEvents = new MapEvents(this.map, new PinsModel());
     }
-
 }
