@@ -1,13 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="b3841dfd-b8f1-47e9-bf85-33aee113862a" name="Default Changelist" comment="The authorization service needs to prevent the user from reaching the secret component when the user is not authenticated.">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/src/app/app-routing.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/app/app-routing.module.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/src/app/components/secretchat/secretchat.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/app/components/secretchat/secretchat.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Server/Database/DataAccess/DataAccessBase.ts" beforeDir="false" afterPath="$PROJECT_DIR$/Server/Database/DataAccess/DataAccessBase.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Chapter07/src/app/components/map-view/map-view.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../Chapter07/src/app/components/map-view/map-view.component.ts" afterDir="false" />
-    </list>
+    <list default="true" id="b3841dfd-b8f1-47e9-bf85-33aee113862a" name="Default Changelist" comment="" />
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
     <ignored path="$PROJECT_DIR$/tmp/" />
@@ -58,8 +52,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Client/src/app/components/secretchat/secretchat.component.ts">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="180">
-              <caret line="19" selection-start-line="19" selection-end-line="19" />
+            <state relative-caret-position="368">
+              <caret line="16" lean-forward="true" selection-start-line="16" selection-end-line="16" />
               <folding>
                 <element signature="e#0#59#0" expanded="true" />
               </folding>
@@ -342,7 +336,7 @@
       <workItem from="1554912274256" duration="2855000" />
       <workItem from="1554928063427" duration="10123000" />
       <workItem from="1554969982941" duration="3710000" />
-      <workItem from="1554988577380" duration="2938000" />
+      <workItem from="1554988577380" duration="3340000" />
     </task>
     <task id="LOCAL-00001" summary="Added a general purpose logging method. Not that I would recommend it as a production sample - but for demonstrating reading parameters, it's a good example.">
       <created>1554973459555</created>
@@ -351,11 +345,18 @@
       <option name="project" value="LOCAL" />
       <updated>1554973459555</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="The authorization service needs to prevent the user from reaching the secret component when the user is not authenticated.">
+      <created>1554996910164</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1554996910165</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="80102000" />
+    <option name="totallyTimeSpent" value="80504000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
@@ -769,8 +770,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Client/src/app/components/secretchat/secretchat.component.ts">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="180">
-          <caret line="19" selection-start-line="19" selection-end-line="19" />
+        <state relative-caret-position="368">
+          <caret line="16" lean-forward="true" selection-start-line="16" selection-end-line="16" />
           <folding>
             <element signature="e#0#59#0" expanded="true" />
           </folding>
