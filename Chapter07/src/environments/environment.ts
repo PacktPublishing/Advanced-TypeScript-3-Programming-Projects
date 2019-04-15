@@ -3,7 +3,16 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  firebase: {
+    apiKey: "AIzaSyC0MzFxTtvt6cCvmTGE94xc5INFRYlXznw",
+    authDomain: "advancedtypescript3-chatapp.firebaseapp.com",
+    databaseURL: "https://advancedtypescript3-chatapp.firebaseio.com",
+    projectId: "advancedtypescript3-chatapp",
+    storageBucket: "advancedtypescript3-chatapp.appspot.com",
+    messagingSenderId: "6102469443"
+  },
+  mapKey: 'ApKBOGD6mTjyn0tcEXMozQwWz1m7hI6kl2mh74SWyPuzsfyQtc2_pUwYtshoBC1b'
 };
 
 /*
@@ -14,3 +23,20 @@ export const environment = {
  * on performance if an error is thrown.
  */
 // import 'zone.js/dist/zone-error';  // Included with Angular CLI.
+
+/*
+
+<script src="https://www.gstatic.com/firebasejs/5.9.4/firebase.js"></script>
+<script>
+  // Initialize Firebase
+  var config = {
+    apiKey: "AIzaSyC0MzFxTtvt6cCvmTGE94xc5INFRYlXznw",
+    authDomain: "advancedtypescript3-chatapp.firebaseapp.com",
+    databaseURL: "https://advancedtypescript3-chatapp.firebaseio.com",
+    projectId: "advancedtypescript3-chatapp",
+    storageBucket: "advancedtypescript3-chatapp.appspot.com",
+    messagingSenderId: "6102469443"
+  };
+  firebase.initializeApp(config);
+</script>
+*/

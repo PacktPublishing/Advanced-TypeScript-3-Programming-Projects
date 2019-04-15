@@ -1,6 +1,7 @@
 /// <reference path='../../../../node_modules/bingmaps/types/MicrosoftMaps/Microsoft.Maps.All.d.ts' />
 
 import { EventEmitter, Component, OnInit, ViewChild, Output } from '@angular/core';
+import { environment } from 'src/environments/environment.prod';
 
 @Component({
   selector: 'atp-map-view',
@@ -25,7 +26,7 @@ export class MapViewComponent implements OnInit {
     // Bing has a nasty habit of not working properly in browsers like Chrome if we don't hook the map up 
     // in the window.load event.
     const map = new Microsoft.Maps.Map(this.myMap.nativeElement, {
-      credentials: 'ApKBOGD6mTjyn0tcEXMozQwWz1m7hI6kl2mh74SWyPuzsfyQtc2_pUwYtshoBC1b',
+      credentials: environment.mapKey,
       enableCORS: true,
       zoom: 13
     });

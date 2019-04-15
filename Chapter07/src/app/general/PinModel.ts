@@ -4,3 +4,7 @@ export class PinModel {
   long: number;
   name: string;
 }
+
+export interface PinModelData extends PinModel {
+  storageId: string;
+}
