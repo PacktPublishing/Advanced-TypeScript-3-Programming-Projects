@@ -14,9 +14,8 @@ export class GeneralchatComponent implements OnInit, OnDestroy {
   constructor(private chatService: ChatMessagesService) { }
 
   ngOnInit() {
-    this.chatService.JoinRoom('');
-    this.subscription = this.chatService.DefaultMessages().subscribe((msg: string) =>{
-      this.messages.push(msg)
+    this.subscription = this.chatService.GetMessages('').subscribe((msg: string) =>{
+      this.messages.push(msg);
     });
   }
 

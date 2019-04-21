@@ -13,12 +13,12 @@ export class SecretchatComponent implements OnInit, OnDestroy {
 
   messages: string[] = [];
 
-  constructor(private chatService: ChatMessagesService) { }
-
+  constructor(private chatService: ChatMessagesService) {
+  }
 
   ngOnInit() {
-    this.chatService.JoinRoom('secret');
-    this.subscription = this.chatService.SecureMessages('secret').subscribe((msg: string) =>{
+    this.messages = [];
+    this.subscription = this.chatService.GetMessages('secret').subscribe((msg: string) =>{
       this.messages.push(msg)
     });
   }

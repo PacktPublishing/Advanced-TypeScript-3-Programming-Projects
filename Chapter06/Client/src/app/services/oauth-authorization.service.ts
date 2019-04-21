@@ -27,6 +27,7 @@ export class OauthAuthorizationService {
     this.auth0.authorize();
   }
 
+  @Log()
   public Logout(): void {
     this.authorization.Clear();
     this.auth0.logout({

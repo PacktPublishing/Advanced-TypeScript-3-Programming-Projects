@@ -25,11 +25,7 @@ export class SocketServer  {
           socket.join(room);
         }
         this.messageDataAccess.GetAll({room: room}, {messageText: 1, _id: 0}).then((msgs: string[]) =>{
-          if (room === '') {
-            socket.emit('allMessages', msgs);
-          } else {
-            io.sockets.in(room).emit('allMessages', msgs);
-          }
+          socket.emit('allMessages', msgs);
         });
         lastRoom = room;
       });
@@ -37,10 +33,8 @@ export class SocketServer  {
       socket.on('message', (msg: string) => {
         this.WriteMessage(io, msg, lastRoom);
       });
-      // We maintain a metric of how many users we currently have
+
       socket.on('loggedOn', (msg: any) => {
-        //socket.emit('userLogOn', { user: msg, time: new Date() });
-        // We have socket.emit and io.emit - io.emit goes to all whereas socket.emit goes to the current connection
         io.sockets.in('secret').emit('userLogOn', { user: msg, time: new Date() });
       });
     });
