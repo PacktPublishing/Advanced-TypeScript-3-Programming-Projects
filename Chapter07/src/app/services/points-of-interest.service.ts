@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient} from '@angular/common/http';
 import { environment } from 'src/environments/environment';
-import { map, catchError, tap } from 'rxjs/operators';
+import { map} from 'rxjs/operators';
 
 export interface PoiPoint {
   lat: number,
@@ -9,7 +9,7 @@ export interface PoiPoint {
   name: string
 }
 
-export type location = [number, number];
+type location = [number, number];
 @Injectable({
     providedIn: 'root'
 })
@@ -19,13 +19,8 @@ export class PointsOfInterestService {
 
   public Search(location: location): Promise<PoiPoint[]> {
     const endpoint = `https://dev.virtualearth.net/REST/v1/LocalSearch/?query=coffee&userLocation=${location[0]},${location[1]}&key=${environment.mapKey}`;
-    const httpOptions = {
-      headers: new HttpHeaders({
-          'Content-Type': 'application/json'
-      })
-    };
     return new Promise<PoiPoint[]>((callback) => {
-      this.http.get(endpoint).pipe(map(this.MapData)).subscribe((x: any) => {
+      this.http.get(endpoint).pipe(map(PointsOfInterestService.MapData)).subscribe((x: any) => {
         const points: PoiPoint[] = [];
         if (x.resourceSets && x.resourceSets.length > 0 && x.resourceSets[0].resources) {
           x.resourceSets[0].resources.forEach(element => {
@@ -44,8 +39,7 @@ export class PointsOfInterestService {
     });
   }
 
-  private MapData(data: Response) {
-    const body = data;
-    return body || {};
+  private static MapData(data: Response) {
+    return data || {};
   }
 }
