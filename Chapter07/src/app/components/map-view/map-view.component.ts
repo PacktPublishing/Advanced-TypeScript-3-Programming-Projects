@@ -1,7 +1,7 @@
 /// <reference path='../../../../node_modules/bingmaps/types/MicrosoftMaps/Microsoft.Maps.All.d.ts' />
 
-import { EventEmitter, Component, OnInit, ViewChild, Output } from '@angular/core';
-import { environment } from 'src/environments/environment.prod';
+import {Component, EventEmitter, OnInit, Output, ViewChild} from '@angular/core';
+import {environment} from 'src/environments/environment.prod';
 
 @Component({
   selector: 'atp-map-view',
@@ -28,7 +28,7 @@ export class MapViewComponent implements OnInit {
     const map = new Microsoft.Maps.Map(this.myMap.nativeElement, {
       credentials: environment.mapKey,
       enableCORS: true,
-      zoom: 13
+      zoom: 13, mapTypeId:Microsoft.Maps.MapTypeId.road
     });
 
     this.map.emit(map);

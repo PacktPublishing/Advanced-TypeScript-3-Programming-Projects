@@ -20,26 +20,24 @@ export class MapEvents {
             this.AddPoi(pointsOfInterest);
           }
         })
-      })
+      });
       const subscription = this.pinsModel.Load().subscribe((data: PinModelData[]) => {
         data.forEach(pinData => {
           const pin: Microsoft.Maps.Pushpin = new Microsoft.Maps.Pushpin(new Microsoft.Maps.Location(pinData.lat, pinData.long), {
               draggable: true
           });
           this.map.entities.push(pin);
-          Microsoft.Maps.Events.addHandler(pin, 'click', () => {
+          const handler = Microsoft.Maps.Events.addHandler(pin, 'click', () => {
             this.pinsModel.Remove(pinData.id);
             this.map.entities.remove(pin);
+            Microsoft.Maps.Events.removeHandler(handler);
+            Microsoft.Maps.Events.removeHandler(dragHandler);
           });
-          Microsoft.Maps.Events.addHandler(pin, 'dragend', (args: any) => {
-            this.geocode.GeoCode(args.location).then((geocode) => {
+          const dragHandler = Microsoft.Maps.Events.addHandler(pin, 'dragend', (args: any) => {
+            this.geocode.ReverseGeocode(args.location).then((geocode) => {
               this.pinsModel.Move(pinData.id, geocode, args.location.latitude, args.location.longitude);
               this.map.entities.push(pin);
-              this.infoBox.setOptions({
-                description: geocode,
-                location: pin.getLocation(),
-                visible: true
-              });
+              this.SetInfoBox('User location (Moved)', geocode, pin);
             });
           });
         });
@@ -64,7 +62,7 @@ export class MapEvents {
       const pin: Microsoft.Maps.Pushpin = new Microsoft.Maps.Pushpin(e.location, {
         draggable: true
       });
-      this.geocode.GeoCode(e.location).then((geocode) => {
+      this.geocode.ReverseGeocode(e.location).then((geocode) => {
         this.pinsModel.Add(guid.toString(), geocode, e.location.latitude, e.location.longitude);
         this.map.entities.push(pin);
         this.SetInfoBox('User location', geocode, pin);
@@ -72,9 +70,8 @@ export class MapEvents {
 
       // Pins can be dragged so track the drag end
       const dragHandler = Microsoft.Maps.Events.addHandler(pin, 'dragend', (args: any) => {
-        this.geocode.GeoCode(args.location).then((geocode) => {
+        this.geocode.ReverseGeocode(args.location).then((geocode) => {
           this.pinsModel.Move(guid.toString(), geocode, args.location.latitude, args.location.longitude);
-          this.map.entities.push(pin);
           this.SetInfoBox('User location (Moved)', geocode, pin);
         });
       });

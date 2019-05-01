@@ -5,7 +5,7 @@ export class MapGeocode {
       this.searchManager = new Microsoft.Maps.Search.SearchManager(this.map);
     });
   }
-  public GeoCode(location: Microsoft.Maps.Location): Promise<string> {
+  public ReverseGeocode(location: Microsoft.Maps.Location): Promise<string> {
     return new Promise<string>((callback) => {
       const request = {
         location: location,

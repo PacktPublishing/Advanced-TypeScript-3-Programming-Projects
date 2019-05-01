@@ -21,7 +21,7 @@ export class PinsModel {
       lat: args[2],
       long: args[3],
       storageId: ''
-    }
+    };
     this.firebaseMapService.Save(data);
     this.pins.push(data);
   }
@@ -33,13 +33,11 @@ export class PinsModel {
       pinModel.lat = args[2];
       pinModel.long = args[3];
     }
-    ///TODO: Sort out update
     this.firebaseMapService.Save(pinModel);
   }
 
   public Remove(id: string) {
     const pinModel: PinModelData = this.pins.find(x => x.id === id);
-    console.log('Model is ', pinModel);
     this.firebaseMapService.Delete(pinModel);
     const index: number = this.pins.findIndex(x => x.id === id);
     if (index >= 0) {
