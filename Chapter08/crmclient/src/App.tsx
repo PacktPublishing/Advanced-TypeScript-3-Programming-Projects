@@ -19,10 +19,6 @@ export class App extends React.Component {
       </Container>
     );
   }
-
-  private ReadData(): void {
-    axios
-  }
 }
 
 export default App;
