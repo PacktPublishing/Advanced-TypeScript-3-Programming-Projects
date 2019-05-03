@@ -3,6 +3,7 @@ import * as React from 'react';
 import { Col, Row, Tab, Tabs } from "react-bootstrap";
 import ReactTable from "react-table";
 import "react-table/react-table.css";
+import { AddPerson } from "./addperson"
 // import { IPerson } from "../../../Services/People/api/Models/People";
 
 export default class People extends React.Component<any, any> {
@@ -12,26 +13,24 @@ export default class People extends React.Component<any, any> {
     this.state = {
       data: []
     }
-    this.EdtableCell = this.EdtableCell.bind(this);
   }
+
   public render() {
     const columns = [{
-      Cell: this.EdtableCell,
       Header: 'First name',
       accessor: 'FirstName'
     },{
-     Cell: this.EdtableCell,
       Header: 'Last name',
       accessor: 'LastName'
     }]
     return (
-      <Tabs id="tabController" defaultActiveKey="show">
-        <Tab eventKey="add" title="Add person">
-          <div />
+      <Tabs id="tabController" defaultActiveKey="show" onSelect={this.ContactTabSelected}>
+        <Tab eventKey="add" title="Add contact">
+          <AddPerson />
         </Tab>
-        <Tab eventKey="show" title="People">
+        <Tab eventKey="show" title="Contacts">
           <Row>
-            <Col><ReactTable data={this.state.data} columns={columns} defaultPageSize={5} pageSizeOptions = {[3, 6]} className="-striped -highlight" /></Col>
+            <Col><ReactTable data={this.state.data} columns={columns} defaultPageSize={15} pageSizeOptions = {[10, 30]} className="-striped -highlight" /></Col>
           </Row>
         </Tab>
       </Tabs>
@@ -42,28 +41,17 @@ export default class People extends React.Component<any, any> {
     this.Load(); 
   };
 
-  private Load(): void {
+  private ContactTabSelected(): void {
     axios.get("http://localhost:31313/get/").then(x =>
     {
       this.setState({data: x.data});
     });
   }
 
-  private EdtableCell(cellInfo: any) {
-    return (
-      <div
-        style={{ backgroundColor: "#fafafa" }}
-        contentEditable
-        suppressContentEditableWarning
-        onBlur={e => {
-          const data = [...this.state.data];
-          data[cellInfo.index][cellInfo.column.id] = e.target.innerHTML;
-          this.setState({ data });
-        }}
-        dangerouslySetInnerHTML={{
-          __html: this.state.data[cellInfo.index][cellInfo.column.id]
-        }}
-      />
-    )
+  private Load(): void {
+    axios.get("http://localhost:31313/get/").then(x =>
+    {
+      this.setState({data: x.data});
+    });
   }
 }
