@@ -1,3 +1,3 @@
-export interface DatabaseModelBase {
+export interface IDatabaseModelBase {
   ServerID: string;
 }

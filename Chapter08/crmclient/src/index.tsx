@@ -10,15 +10,16 @@ import registerServiceWorker from './registerServiceWorker';
 
 const routing = (
   <Router>
-      <Navbar bg="light">
-    <Navbar.Collapse id="basic-navbar-nav">
-      <Nav.Link href="/">Home</Nav.Link>
-      <Nav.Link href="/people">People</Nav.Link>
-    </Navbar.Collapse>
-  </Navbar>
-
-      <Route path="/" component={App} />
-      <Route path="/people" component={People} />
+    <Navbar bg="light">
+      <Navbar.Collapse id="basic-navbar-nav">
+        <Nav.Link href="/">Home</Nav.Link>
+        <Nav.Link href="/contacts">Contacts</Nav.Link>
+        <Nav.Link href="/leads">Leads</Nav.Link>
+      </Navbar.Collapse>
+    </Navbar>
+    <Route path="/" component={App} />
+    <Route path="/contacts" component={People} />
+    <Route path="/leads" component={People} />
   </Router>
 )
 

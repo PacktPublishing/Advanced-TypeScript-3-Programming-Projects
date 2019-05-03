@@ -1,6 +1,6 @@
-import { DatabaseModelBase } from "../../../Common/Model/DatabaseModelBase";
+import { IDatabaseModelBase } from "../../../Common/Model/DatabaseModelBase";
 
-export interface Person extends DatabaseModelBase {
+export interface IPerson extends IDatabaseModelBase {
   FirstName: string;
   LastName: string;
 }
