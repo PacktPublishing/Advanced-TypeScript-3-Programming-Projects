@@ -2,7 +2,7 @@
   "name": "addresses",
   "version": "1.0.0",
   "description": "Dockerized addresses service",
-  "main": "./dist/Leads/server.js",
+  "main": "./dist/Addresses/service.js",
   "scripts": {
     "start": "nodemon",
     "test": "echo \"Error: no test specified\" && exit 1"

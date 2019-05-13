@@ -1,12 +1,12 @@
 import { Router } from "express";
 import { Server } from "../Common/Server";
-//import { GetPeopleRouting } from "./Routing/GetPeopleRouting";
-import { SaveLeadsRouting } from "./Routing/SaveAddressRouting";
+import { SaveAddressRouting } from "./Routing/SaveAddressRouting";
+import { GetAddressRouting } from "./Routing/GetAddressRouting";
 
 export class AddressesServer extends Server {
   protected AddRouting(router: Router): void {
-    //this.routingEngine.Add(GetPeopleRouting, router);
-    this.routingEngine.Add(SaveLeadsRouting, router);
+    this.routingEngine.Add(GetAddressRouting, router);
+    this.routingEngine.Add(SaveAddressRouting, router);
   }
 }
 

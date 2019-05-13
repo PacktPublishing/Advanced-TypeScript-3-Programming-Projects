@@ -1,15 +1,25 @@
 import * as React from 'react';
 import { Button, Col, Container, Form } from "react-bootstrap";
+import { IAddress } from '../../../Services/Addresses/api/Models/Addresses';
 import { IPerson } from "../../../Services/People/api/Models/People";
 
 export class AddPerson extends React.Component<any, IPerson> {
 
   constructor(props:any) {
     super(props);
+    const address: IAddress = {
+      Line1: '',
+      Line2: '',
+      Line3: '',
+      Line4: '',
+      PostalCode: '',
+      ServerID: '',
+    }
     const person: IPerson = {
+      Address: address,
       FirstName: '',
       LastName: '',
-      ServerID: ''
+      ServerID: '',
     }
     this.state = person;
   }

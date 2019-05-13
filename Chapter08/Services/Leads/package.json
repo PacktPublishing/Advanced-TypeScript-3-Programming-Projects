@@ -2,7 +2,7 @@
   "name": "leads",
   "version": "1.0.0",
   "description": "Dockerized leads service",
-  "main": "./dist/Leads/server.js",
+  "main": "./dist/Leads/service.js",
   "scripts": {
     "start": "nodemon",
     "test": "echo \"Error: no test specified\" && exit 1"
