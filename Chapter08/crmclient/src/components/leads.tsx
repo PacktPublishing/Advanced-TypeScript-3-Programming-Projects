@@ -3,9 +3,9 @@ import * as React from 'react';
 import { Col, Row, Tab, Tabs } from "react-bootstrap";
 import ReactTable from "react-table";
 import "react-table/react-table.css";
-import { AddAddress } from './AddAddress';
+import { AddLead } from './AddLead';
 
-export default class Addresses extends React.Component<any, any> {
+export default class Leads extends React.Component<any, any> {
 
   constructor(props:any) {
     super(props);
@@ -13,30 +13,27 @@ export default class Addresses extends React.Component<any, any> {
       data: []
     }
   }
-
+  
   public render() {
     const columns = [{
-      Header: 'Address line 1',
-      accessor: 'Line1'
+      Header: 'Name',
+      accessor: 'Name'
     }, {
-      Header: 'Address line 2',
-      accessor: 'Line2'
+      Header: 'Topic',
+      accessor: 'Topic'
     }, {
-      Header: 'Address line 3',
-      accessor: 'Line4'
+      Header: 'Created',
+      accessor: 'Created'
     }, {
-      Header: 'Address line 4',
-      accessor: 'Line4'
-    }, {
-      Header: 'Postal code',
-      accessor: 'PostalCode'
+      Header: 'Status',
+      accessor: 'Status'
     }]
     return (
       <Tabs id="tabController" defaultActiveKey="show" onSelect={this.TabSelected}>
-        <Tab eventKey="add" title="Add address">
-          <AddAddress />
+        <Tab eventKey="add" title="Add lead">
+          <AddLead />
         </Tab>
-        <Tab eventKey="show" title="Addresses">
+        <Tab eventKey="show" title="Leads">
           <Row>
             <Col><ReactTable data={this.state.data} columns={columns} defaultPageSize={15} pageSizeOptions = {[10, 30]} className="-striped -highlight" /></Col>
           </Row>
@@ -51,14 +48,14 @@ export default class Addresses extends React.Component<any, any> {
   };
 
   private TabSelected(): void {
-    axios.get("http://localhost:17171/get/").then(x =>
+    axios.get("http://localhost:65432/get/").then(x =>
     {
       this.setState({data: x.data});
     });
   }
 
   private Load(): void {
-    axios.get("http://localhost:17171/get/").then(x =>
+    axios.get("http://localhost:65432/get/").then(x =>
     {
       this.setState({data: x.data});
     });

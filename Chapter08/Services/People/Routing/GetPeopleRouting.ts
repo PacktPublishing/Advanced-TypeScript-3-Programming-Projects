@@ -13,4 +13,3 @@ export class GetPeopleRouting implements IRouter {
     });
   }
 }
-

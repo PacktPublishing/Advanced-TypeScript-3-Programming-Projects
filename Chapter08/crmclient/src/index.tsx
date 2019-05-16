@@ -5,6 +5,7 @@ import * as ReactDOM from 'react-dom';
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import App from './App';
 import Addresses from "./components/addresses";
+import Leads from './components/leads';
 import People from "./components/people";
 import './index.css';
 import registerServiceWorker from './registerServiceWorker';
@@ -22,7 +23,7 @@ const routing = (
     <Route path="/" component={App} />
     <Route path="/addresses" component={Addresses} />
     <Route path="/contacts" component={People} />
-    <Route path="/leads" component={People} />
+    <Route path="/leads" component={Leads} />
   </Router>
 )
 

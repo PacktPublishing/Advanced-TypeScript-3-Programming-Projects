@@ -1,13 +1,12 @@
-import { IPerson } from '../../People/api/Models/People';
 import firebase from "firebase";
 import { Guid } from "guid-typescript";
 import { IDatabaseModelBase } from './DatabaseModelBase';
 export abstract class FirestoreService<T extends IDatabaseModelBase> {
   constructor(private collection: string) {
   }
-  public async Get(id: string): Promise<IPerson> {
+  public async Get(id: string): Promise<T> {
     const qry = await firebase.firestore().collection(this.collection).doc(id).get();
-    return <IPerson>qry.data();
+    return <T>qry.data();
   }
   public async GetAll(): Promise<T[]> {
     const qry = await firebase.firestore().collection(this.collection).get();

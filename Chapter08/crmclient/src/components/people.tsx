@@ -39,7 +39,7 @@ export default class People extends React.Component<any, any> {
       accessor: 'Address.PostalCode'
     }]
     return (
-      <Tabs id="tabController" defaultActiveKey="show" onSelect={this.ContactTabSelected}>
+      <Tabs id="tabController" defaultActiveKey="show" onSelect={this.TabSelected}>
         <Tab eventKey="add" title="Add contact">
           <AddPerson />
         </Tab>
@@ -56,7 +56,7 @@ export default class People extends React.Component<any, any> {
     this.Load(); 
   };
 
-  private ContactTabSelected(): void {
+  private TabSelected(): void {
     axios.get("http://localhost:31313/get/").then(x =>
     {
       this.setState({data: x.data});

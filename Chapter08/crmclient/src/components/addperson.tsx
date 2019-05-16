@@ -1,13 +1,15 @@
+import Axios from 'axios';
 import * as React from 'react';
 import { Button, Col, Container, Form } from "react-bootstrap";
 import { IAddress } from '../../../Services/Addresses/api/Models/Addresses';
 import { IPerson } from "../../../Services/People/api/Models/People";
+import { AddressesChoice } from './addresses-choice';
 
 export class AddPerson extends React.Component<any, IPerson> {
-
+  private defaultAddress : IAddress;
   constructor(props:any) {
     super(props);
-    const address: IAddress = {
+    this.defaultAddress = {
       Line1: '',
       Line2: '',
       Line3: '',
@@ -15,13 +17,15 @@ export class AddPerson extends React.Component<any, IPerson> {
       PostalCode: '',
       ServerID: '',
     }
-    const person: IPerson = {
-      Address: address,
+    const person : IPerson = {
+      Address: this.defaultAddress,
       FirstName: '',
       LastName: '',
       ServerID: '',
     }
     this.state = person;
+    this.Save = this.Save.bind(this);
+    this.CurrentSelection = this.CurrentSelection.bind(this);
   }
 
   public render() {
@@ -29,52 +33,25 @@ export class AddPerson extends React.Component<any, IPerson> {
       <Container>
       <Form>
         <Form.Row>
-          <Form.Group as={Col} controlId="formFirstName">
+          <Form.Group as={Col}>
             <Form.Label>First name</Form.Label>
-            <Form.Control placeholder="Enter first name" />
+            <Form.Control id="firstName" value={this.state.FirstName} onChange={this.UpdateBinding} placeholder="Enter first name" />
           </Form.Group>
 
-          <Form.Group as={Col} controlId="formLastName">
+          <Form.Group as={Col}>
             <Form.Label>Last name</Form.Label>
-            <Form.Control  placeholder="Enter last name" />
+            <Form.Control id="lastName" value={this.state.LastName} onChange={this.UpdateBinding} placeholder="Enter last name" />
           </Form.Group>
         </Form.Row>
-
-        <Form.Group controlId="formGridAddress1">
-          <Form.Label>Address</Form.Label>
-          <Form.Control placeholder="First line of address" />
-        </Form.Group>
-
-        <Form.Group controlId="formGridAddress2">
-          <Form.Label>Address 2</Form.Label>
-          <Form.Control placeholder="Apartment, studio, or floor" />
-        </Form.Group>
 
         <Form.Row>
-          <Form.Group as={Col} controlId="formGridCity">
-            <Form.Label>City</Form.Label>
-            <Form.Control />
-          </Form.Group>
-
-          <Form.Group as={Col} controlId="formGridState">
-            <Form.Label>State</Form.Label>
-            <Form.Control as="select">
-              <option>Choose...</option>
-              <option>...</option>
-            </Form.Control>
-          </Form.Group>
-
-          <Form.Group as={Col} controlId="formGridZip">
-            <Form.Label>Zip</Form.Label>
-            <Form.Control />
+          <Form.Group>
+            <Form.Label>Choose address</Form.Label>
+            <AddressesChoice CurrentSelection={this.CurrentSelection} />
           </Form.Group>
         </Form.Row>
 
-        <Form.Group id="formGridCheckbox">
-          <Form.Check type="checkbox" label="Check me out" />
-        </Form.Group>
-
-        <Button variant="primary" type="submit">
+        <Button variant="primary" type="submit" onClick={this.Save}>
           Submit
         </Button>
       </Form>
@@ -83,4 +60,27 @@ export class AddPerson extends React.Component<any, IPerson> {
     )
   }
 
+  private UpdateBinding = (event:any) => {
+    switch (event.target.id)
+    {
+      case "firstName":
+        this.setState({FirstName : event.target.value});
+        break;
+      case "lastName":
+        this.setState({LastName : event.target.value});
+        break;
+    }
+  }
+
+  private Save(): void {
+    Axios.post("http://localhost:31313/add/", this.state);
+  }
+
+  private CurrentSelection(address: IAddress | null) {
+    if (address) {
+      this.setState({ Address: address });
+    } else {
+      this.setState({ Address: this.defaultAddress });
+    }
+  }
 }

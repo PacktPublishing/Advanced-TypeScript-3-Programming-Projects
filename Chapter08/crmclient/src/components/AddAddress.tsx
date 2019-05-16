@@ -4,16 +4,18 @@ import { Button, Container, Form } from "react-bootstrap";
 import { IAddress } from '../../../Services/Addresses/api/Models/Addresses';
 
 export class AddAddress extends React.Component<any, IAddress> {
+  private defaultState: Readonly<IAddress>;
   constructor(props:any) {
     super(props);
-    const address: IAddress = {
-      Line1: 'kasdkjfhasdkf',
-      Line2: 'asdafs',
-      Line3: 'asdfasdf',
-      Line4: 'asdfasfd',
-      PostalCode: 'asdfasdf',
+    this.defaultState = {
+      Line1: '',
+      Line2: '',
+      Line3: '',
+      Line4: '',
+      PostalCode: '',
       ServerID: '',
-    }
+    };
+    const address: IAddress = this.defaultState;
     this.state = address;
     this.Save = this.Save.bind(this);
   }
@@ -28,22 +30,22 @@ export class AddAddress extends React.Component<any, IAddress> {
 
         <Form.Group controlId="formGridAddress2">
           <Form.Label>Address 2</Form.Label>
-          <Form.Control placeholder="Apartment, studio, or floor" id="address2" value={this.state.Line2} onChange={this.UpdateBinding} />
+          <Form.Control  id="address2" value={this.state.Line2} onChange={this.UpdateBinding} />
         </Form.Group>
 
         <Form.Group controlId="formGridAddress2">
           <Form.Label>Address 3</Form.Label>
-          <Form.Control placeholder="Apartment, studio, or floor" id="address3" value={this.state.Line3} onChange={this.UpdateBinding} />
+          <Form.Control  id="address3" value={this.state.Line3} onChange={this.UpdateBinding} />
         </Form.Group>
 
         <Form.Group controlId="formGridAddress2">
           <Form.Label>Address 4</Form.Label>
-          <Form.Control placeholder="Apartment, studio, or floor" id="address4" value={this.state.Line4} onChange={this.UpdateBinding} />
+          <Form.Control  id="address4" value={this.state.Line4} onChange={this.UpdateBinding} />
         </Form.Group>
 
         <Form.Group controlId="formGridAddress2">
           <Form.Label>Zip Code</Form.Label>
-          <Form.Control placeholder="Apartment, studio, or floor" id="zipcode" value={this.state.PostalCode} onChange={this.UpdateBinding}/>
+          <Form.Control  id="zipcode" value={this.state.PostalCode} onChange={this.UpdateBinding}/>
         </Form.Group>
 
         <Button variant="primary" type="submit" onClick={this.Save}>
@@ -63,6 +65,7 @@ export class AddAddress extends React.Component<any, IAddress> {
       ServerID: ''
     }
     axios.post("http://localhost:17171/add/", address);
+    this.setState(this.defaultState);
   }
 
   private UpdateBinding = (event: any) => {
