@@ -13,6 +13,7 @@ export default class People extends React.Component<any, any> {
     this.state = {
       data: []
     }
+    this.Load = this.Load.bind(this);
   }
 
   public render() {

@@ -6,6 +6,7 @@ export interface IStatusProperty {
 export class StatusChoice extends React.Component<IStatusProperty> {
   constructor(prop: any) {
     super(prop);
+    this.Changed = this.Changed.bind(this);
   }
   public render() {
     return (<Form.Control as="select" onChange={this.Changed}>

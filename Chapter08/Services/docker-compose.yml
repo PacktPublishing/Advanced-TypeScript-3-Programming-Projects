@@ -1,0 +1,27 @@
+version: '2.1'
+
+services:
+  chapter08_addresses:
+    build: 
+      context: ./Addresses
+      dockerfile: ./Dockerfile
+    environment:
+      NODE_ENV: production
+    ports: 
+      - 17171:3000
+  chapter08_people:
+    build: 
+      context: ./People
+      dockerfile: ./Dockerfile
+    environment:
+      NODE_ENV: production
+    ports: 
+      - 31313:3000
+  chapter08_leads:
+    build: 
+      context: ./Leads
+      dockerfile: ./Dockerfile
+    environment:
+      NODE_ENV: production
+    ports: 
+      - 65432:3000

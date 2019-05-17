@@ -65,18 +65,10 @@ export class AddLead extends React.Component<any, ILead> {
   }
 
   private CurrentSelection(person: string) {
-    if (person) {
-      this.setState({ Name: person });
-    } else {
-      this.setState({ Name: '' });
-    }
+    this.setState({ Name: person });
   }
 
   private CurrentStatus(status: string) {
-    if (status) {
-      this.setState({ Name: status });
-    } else {
-      this.setState({ Name: '' });
-    }
+    this.setState({ Status: status });
   }
 }
