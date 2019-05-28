@@ -1,0 +1,74 @@
+﻿@{
+  ViewData["Title"] = "Home Page";
+}
+
+<div id="pageRoot">
+  <form asp-controller="Home" asp-action="Index">
+    <p>
+      Artist: <input type="text" name="SearchString">
+      <input type="submit" value="Filter" />
+    </p>
+  </form>
+</div>
+
+@{ if (ViewBag.Result != null)
+  {
+    <script src="~/js/discogHelper.js"></script>
+    <div id="carouselExampleSlidesOnly" class="carousel slide" data-ride="carousel">
+      <div class="carousel-inner">
+        @{
+          int index = 0;
+        }
+        @foreach (var item in ViewBag.Result)
+        {
+          string active = "carousel-item";
+          if (index == 0)
+          {
+            active += " active";
+          }
+          <div class="@active">
+            <img id="img_@index" class="d-block w-100" width="150" height="150" />
+            <script type="text/javascript">
+            searchDiscog('@item.ResourceUrl', 'img_@index');
+            </script>
+          </div>
+          index++;
+        }
+        <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="sr-only">Previous</span>
+        </a>
+        <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="sr-only">Next</span>
+        </a>
+      </div>
+    </div>
+    @*<table class="table">
+        <thead>
+          <tr>
+            <th>Title</th>
+            <th>Artwork</th>
+          </tr>
+        </thead>
+        <tbody>
+          @{
+            int index = 0;
+          }
+          @foreach (var item in ViewBag.Result)
+          {
+            <tr>
+              <td>@item.Title</td>
+              <td>
+                <img id="img_@index" width="150" height="150" />
+                <script type="text/javascript">
+                  searchDiscog('@item.ResourceUrl', 'img_@index');
+                </script>
+              </td>
+            </tr>
+            index++;
+          }
+        </tbody>
+      </table>*@
+  }
+}

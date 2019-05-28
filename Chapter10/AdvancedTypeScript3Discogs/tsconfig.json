@@ -1,0 +1,16 @@
+{
+  "compileOnSave": true,
+  "compilerOptions": {
+    "lib": [ "es2015", "dom" ],
+    "noImplicitAny": false,
+    "noEmitOnError": true,
+    "removeComments": false,
+    "sourceMap": true,
+    "target": "es2015",
+    "outDir": "wwwroot/js/"
+  },
+  "exclude": [
+    "node_modules",
+    "wwwroot"
+  ]
+}
