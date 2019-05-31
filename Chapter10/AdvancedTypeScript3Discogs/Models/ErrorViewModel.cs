@@ -1,5 +1,3 @@
-using System;
-
 namespace AdvancedTypeScript3Discogs.Models
 {
   public class ErrorViewModel
