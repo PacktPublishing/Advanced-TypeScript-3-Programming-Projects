@@ -7,7 +7,8 @@ namespace AdvancedTypeScript3Discogs.Discogs
 {
   public class DiscogsClient : IDiscogsClient
   {
-    private IHttpClientFactory _httpClientFactory;
+    private const string BasePath = "https://api.discogs.com/";
+    private readonly IHttpClientFactory _httpClientFactory;
     public DiscogsClient(IHttpClientFactory httpClientFactory)
     {
       _httpClientFactory = httpClientFactory ?? throw new ArgumentNullException(nameof(httpClientFactory));
@@ -19,16 +20,16 @@ namespace AdvancedTypeScript3Discogs.Discogs
       {
         return new Results();
       }
-      var request = new HttpRequestMessage(HttpMethod.Get, GetMethod($"database/search?artist={Uri.EscapeDataString(artist)}&per_page=10"));
+      HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Get, GetMethod($"database/search?artist={Uri.EscapeDataString(artist)}&per_page=10"));
       request.Headers.Add("Authorization", "Discogs token=MyJEHLsbTIydAXFpGafrrphJhxJWwVhWExCynAQh");
       request.Headers.Add("user-agent", "AdvancedTypeScript3Chapter10");
-      var client = _httpClientFactory.CreateClient();
-      var response = await client.SendAsync(request);
+      HttpClient client = _httpClientFactory.CreateClient();
+      HttpResponseMessage response = await client.SendAsync(request);
 
       var content = await response.Content.ReadAsStringAsync();
       return JsonConvert.DeserializeObject<Results>(content);
     }
 
-    private string GetMethod(string path) => $"https://api.discogs.com/{path}";
+    private string GetMethod(string path) => $"{BasePath}{path}";
   }
 }

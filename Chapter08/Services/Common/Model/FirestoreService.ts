@@ -16,7 +16,7 @@ export abstract class FirestoreService<T extends IDatabaseModelBase> {
     });
     return items;
   }
-  public Save(item: T): Promise<T> {
+  public async Save(item: T): Promise<T> {
     return new Promise<T>(async (coll) => {
       item.ServerID = Guid.create().toString();
 
