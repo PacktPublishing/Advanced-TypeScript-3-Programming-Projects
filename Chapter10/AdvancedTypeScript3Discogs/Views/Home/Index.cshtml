@@ -3,11 +3,11 @@
 }
 
 <div id="pageRoot">
-  <form asp-controller="Home" asp-action="Index">
-    <p>
-      Artist: <input type="text" name="SearchString">
-      <input type="submit" value="Filter" />
-    </p>
+  <form asp-controller="Home" asp-action="Index" class="form-inline">
+    <div class="form-group mx-sm-3 mb-10">
+      <input type="text" name="SearchString" id="SearchString" class="form-control" placeholder="Enter artist to search for">
+    </div>
+    <button type="submit" class="btn btn-primary">Search</button>
   </form>
 </div>
 
