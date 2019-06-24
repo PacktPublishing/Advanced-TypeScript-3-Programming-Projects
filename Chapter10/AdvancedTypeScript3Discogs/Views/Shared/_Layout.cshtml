@@ -1,57 +1,69 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>@ViewData["Title"] - AdvancedTypeScript 3 - Discogs</title>
 
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <link rel="stylesheet" 
+        href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" 
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" 
+        crossorigin="anonymous">
+  <environment include="Development">
+    <link rel="stylesheet" href="~/css/site.css"/>
+  </environment>
   <environment exclude="Development">
-    <link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true"/>
   </environment>
 </head>
 <body>
-  <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <div class="container">
-      <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">AdvancedTypeScript3 - Discogs</a>
-      <div class="navbar-header">
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-      </div>
-      <div class="navbar-collapse collapse">
-        <ul class="nav navbar-nav">
-          <li><a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
-          <li><a class="nav-link" asp-area="" asp-controller="Home" asp-action="About">About</a></li>
-          <li><a class="nav-link" asp-area="" asp-controller="Home" asp-action="Contact">Contact</a></li>
-        </ul>
-      </div>
-    </div>
-  </nav>
-
-  <partial name="_CookieConsentPartial" />
-
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
   <div class="container">
-    <div class="row">
-      <div class="col-lg-12">
-        @RenderBody()
-      </div>
+    <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">AdvancedTypeScript3 - Discogs</a>
+    <div class="navbar-header">
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
     </div>
-    <hr />
-    <footer>
-      <p>&copy; 2019 - Advanced TypeScript3 - Discogs Artist search</p>
-    </footer>
+    <div class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+          <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+        </li>
+        <li>
+          <a class="nav-link" asp-area="" asp-controller="Home" asp-action="About">About</a>
+        </li>
+        <li>
+          <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Contact">Contact</a>
+        </li>
+      </ul>
+    </div>
   </div>
-  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-  <environment include="Development">
-    <script src="~/js/site.js" asp-append-version="true"></script>
-  </environment>
-  <environment exclude="Development">
-    <script src="~/js/site.min.js" asp-append-version="true"></script>
-  </environment>
+</nav>
 
-  @RenderSection("Scripts", required: false)
+<partial name="_CookieConsentPartial"/>
+
+<div class="container">
+  <div class="row">
+    <div class="col-lg-12">
+      @RenderBody()
+    </div>
+  </div>
+  <hr/>
+  <footer>
+    <p>&copy; 2019 - Advanced TypeScript3 - Discogs Artist search</p>
+  </footer>
+</div>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+<environment include="Development">
+  <script src="~/js/site.js" asp-append-version="true"></script>
+</environment>
+<environment exclude="Development">
+  <script src="~/js/site.min.js" asp-append-version="true"></script>
+</environment>
+
+@RenderSection("Scripts", required: false)
 </body>
 </html>

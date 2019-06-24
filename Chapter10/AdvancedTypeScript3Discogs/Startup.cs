@@ -1,4 +1,4 @@
-﻿using AdvancedTypeScript3Discogs.Discogs;
+﻿using AdvancedTypeScript3Discogs.Models.Discogs;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;

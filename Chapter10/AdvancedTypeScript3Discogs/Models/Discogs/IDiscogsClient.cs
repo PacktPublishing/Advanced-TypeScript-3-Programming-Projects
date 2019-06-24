@@ -1,6 +1,6 @@
 ﻿using System.Threading.Tasks;
 
-namespace AdvancedTypeScript3Discogs.Discogs
+namespace AdvancedTypeScript3Discogs.Models.Discogs
 {
   public interface IDiscogsClient
   {

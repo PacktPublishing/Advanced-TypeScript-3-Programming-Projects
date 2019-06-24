@@ -1,13 +1,13 @@
-﻿const searchDiscog = async (request: RequestInfo, imgId: string): Promise<any> => {
-  return new Promise(r => {
+﻿const searchDiscog = (request: RequestInfo, imgId: string): Promise<void> => {
+  return new Promise((): void => {
     fetch(request,
-        {
-          method: 'GET',
-          headers: {
-            'authorization': 'Discogs token=MyJEHLsbTIydAXFpGafrrphJhxJWwVhWExCynAQh',
-            'user-agent': 'AdvancedTypeScript3Chapter10'
-          }
-        })
+      {
+        method: 'GET',
+        headers: {
+          'authorization': 'Discogs token=MyJEHLsbTIydAXFpGafrrphJhxJWwVhWExCynAQh',
+          'user-agent': 'AdvancedTypeScript3Chapter10'
+        }
+      })
       .then(response => {
         return response.json();
       })

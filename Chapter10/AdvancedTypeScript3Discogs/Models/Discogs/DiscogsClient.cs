@@ -1,9 +1,9 @@
-﻿using Newtonsoft.Json;
-using System;
+﻿using System;
 using System.Net.Http;
 using System.Threading.Tasks;
+using Newtonsoft.Json;
 
-namespace AdvancedTypeScript3Discogs.Discogs
+namespace AdvancedTypeScript3Discogs.Models.Discogs
 {
   public class DiscogsClient : IDiscogsClient
   {

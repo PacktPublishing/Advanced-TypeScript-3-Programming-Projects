@@ -1,7 +1,7 @@
 ﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 
-namespace AdvancedTypeScript3Discogs.Discogs
+namespace AdvancedTypeScript3Discogs.Models.Discogs
 {
   public class Results
   {

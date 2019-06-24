@@ -1,8 +1,8 @@
 ﻿using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using AdvancedTypeScript3Discogs.Models;
-using AdvancedTypeScript3Discogs.Discogs;
 using System.Threading.Tasks;
+using AdvancedTypeScript3Discogs.Models.Discogs;
 
 namespace AdvancedTypeScript3Discogs.Controllers
 {
@@ -16,8 +16,12 @@ namespace AdvancedTypeScript3Discogs.Controllers
 
     public async Task<IActionResult> Index(string searchString)
     {
-      var client = await _discogsClient.GetByArtist(searchString);
-      ViewBag.Result = client.results;
+      if (!string.IsNullOrWhiteSpace(searchString))
+      {
+        var client = await _discogsClient.GetByArtist(searchString);
+        ViewBag.Result = client.results;
+      }
+
       return View();
     }
 
