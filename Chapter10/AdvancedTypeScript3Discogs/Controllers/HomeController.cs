@@ -18,18 +18,11 @@ namespace AdvancedTypeScript3Discogs.Controllers
     {
       if (!string.IsNullOrWhiteSpace(searchString))
       {
-        var client = await _discogsClient.GetByArtist(searchString);
-        ViewBag.Result = client.results;
+        Results client = await _discogsClient.GetByArtist(searchString);
+        ViewBag.Result = client.ResultsList;
       }
 
       return View();
-    }
-
-    [HttpPost]
-    public IActionResult GetMessage()
-    {
-      var data = new { Title = "Wotcher" };
-      return Json(data);
     }
 
     public IActionResult About()

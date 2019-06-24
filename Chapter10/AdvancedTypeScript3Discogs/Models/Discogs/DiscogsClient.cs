@@ -20,14 +20,16 @@ namespace AdvancedTypeScript3Discogs.Models.Discogs
       {
         return new Results();
       }
-      HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Get, GetMethod($"database/search?artist={Uri.EscapeDataString(artist)}&per_page=10"));
+      HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Get, 
+        GetMethod($"database/search?artist={Uri.EscapeDataString(artist)}&per_page=10"));
       request.Headers.Add("Authorization", "Discogs token=MyJEHLsbTIydAXFpGafrrphJhxJWwVhWExCynAQh");
       request.Headers.Add("user-agent", "AdvancedTypeScript3Chapter10");
-      HttpClient client = _httpClientFactory.CreateClient();
-      HttpResponseMessage response = await client.SendAsync(request);
-
-      var content = await response.Content.ReadAsStringAsync();
-      return JsonConvert.DeserializeObject<Results>(content);
+      using (HttpClient client = _httpClientFactory.CreateClient())
+      {
+        HttpResponseMessage response = await client.SendAsync(request);
+        string content = await response.Content.ReadAsStringAsync();
+        return JsonConvert.DeserializeObject<Results>(content);
+      }
     }
 
     private string GetMethod(string path) => $"{BasePath}{path}";
