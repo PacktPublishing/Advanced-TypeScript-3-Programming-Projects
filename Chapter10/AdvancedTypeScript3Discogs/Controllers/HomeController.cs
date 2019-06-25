@@ -27,13 +27,13 @@ namespace AdvancedTypeScript3Discogs.Controllers
 
     public IActionResult About()
     {
-      ViewData["Message"] = "Your application description page.";
+      ViewData["Message"] = "Building a Music Library with ASP .NET Core, Visual Studio and TypeScript.";
       return View();
     }
 
     public IActionResult Contact()
     {
-      ViewData["Message"] = "Your contact page.";
+      ViewData["Message"] = "There are a number of different ways you can reach us if you want to get in touch.";
 
       return View();
     }
