@@ -4,7 +4,7 @@ import { Response } from "express";
 export class GetPicturesRouter implements IRouter {
   public AddRoute(route: any): void {
     route.get('/get/', (request: Request, response: Response) => {
-      Picture.distinct("_id", (err, picture) => {
+      Picture.distinct("_id", (err: any, picture: any) => {
         if (err) {
           response.send(err);
         }
