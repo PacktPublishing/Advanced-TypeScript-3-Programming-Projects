@@ -11,7 +11,7 @@ export abstract class FirestoreService<T extends IDatabaseModelBase> {
   public async GetAll(): Promise<T[]> {
     const qry = await firebase.firestore().collection(this.collection).get();
     const items: T[] = new Array<T>();
-    qry.forEach(item => {
+    qry.forEach((item: any) => {
       items.push(<T>item.data());
     });
     return items;
