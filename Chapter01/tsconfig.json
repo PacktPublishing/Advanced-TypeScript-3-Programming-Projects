@@ -1,0 +1,18 @@
+{
+  "compilerOptions": {
+    "target": "ES2015",
+    "module": "commonjs",
+    "lib": [ "ES2015", "dom" ],
+    "sourceMap": true,
+    "outDir": "./script",              
+    "strict": true,                    
+    "strictNullChecks": true,          
+    "strictFunctionTypes": true,       
+    "noImplicitThis": true,            
+    "alwaysStrict": true,              
+    "noImplicitReturns": true,         
+    "noFallthroughCasesInSwitch": true,
+    "esModuleInterop": true,
+    "experimentalDecorators": true,    
+  }
+}
