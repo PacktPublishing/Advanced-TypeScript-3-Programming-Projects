@@ -1,27 +1,9 @@
-# Client
+# Client notes
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 7.3.6.
+This application uses Auth0 to provide authentication. While there is a sample endpoint in oauth-authorization.service.ts, this is not live details so you will need to supply your own. In the book, I talk about how you need to sign up to the Auth0 but this is a quick recap.
 
-## Development server
+When you have signed up, you will need to copy your client id and replace the clientID entry with the one you create. You may also need to replace the domain with the Auth0 domain if you are using a different location.
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+In Auth0, you will also need to set up the Allowed Callbacks URL, this is not provided for you - here I have defaulted this to http://localhost:4200/callback in the redirectUrl in the authorization service. If you change this to a different endpoint, you must change the value in both the redirectUrl AND the authorization service.
 
-## Code scaffolding
-
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
-
-## Build
-
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+When you log out of Auth0, Auth0 needs to know where to redirect you to. You supply this value in the Allowed Logout URLs. I typically default this back to the application default page.
