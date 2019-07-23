@@ -1,27 +1,14 @@
-# TSMapping
+# About the Firebase settings
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 7.3.6.
+While I have provided a set of default values in environment.ts, this is a placeholder only because this referred to settings I used when I set up the application. You need to follow the instructions to sign up to Firebase.
 
-## Development server
+Note, if you cannot save to the database - open the Browser debug console window - if this is telling you that you have a Firebase permission exception, it means that you have signed up in locked mode and not test mode. Fixing this is simple enough - all you need to do is open up the Firebase Console and select Database > Rules. Make sure they match this:
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
-
-## Code scaffolding
-
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
-
-## Build
-
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /{document=**} {
+      allow read, write: if true;
+    }
+  }
+}
