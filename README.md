@@ -1,6 +1,6 @@
 # Advanced TypeScript 3 Programming Projects 
 
-<a href="https://www.packtpub.com/application-development/advanced-typescript-3-programming-projects?utm_source=github&utm_medium=repository&utm_campaign="><img src="" alt="Advanced TypeScript 3 Programming Projects " height="256px" align="right"></a>
+<a href="https://www.packtpub.com/application-development/advanced-typescript-3-programming-projects?utm_source=github&utm_medium=repository&utm_campaign="><img src="https://www.packtpub.com/media/catalog/product/cache/e4d64343b1bc593f1c5348fe05efa4a6/b/1/b10827_mockupcover.png" alt="Advanced TypeScript 3 Programming Projects " height="256px" align="right"></a>
 
 This is the code repository for [Advanced TypeScript 3 Programming Projects ](https://www.packtpub.com/application-development/advanced-typescript-3-programming-projects?utm_source=github&utm_medium=repository&utm_campaign=), published by Packt.
 
