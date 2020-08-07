@@ -17,7 +17,7 @@
     "@types/mongoose": "^5.3.20",
     "apollo-server": "^2.4.0",
     "apollo-server-express": "^2.4.0",
-    "class-transformer": "^0.2.0",
+    "class-transformer": "^0.3.1",
     "express": "^4.16.4",
     "guid-typescript": "^1.0.9",
     "mongoose": "^5.4.16",
