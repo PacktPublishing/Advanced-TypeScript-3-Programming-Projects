@@ -24,6 +24,6 @@
     "nodemon": "^1.18.10",
     "parser": "^0.1.4",
     "reflect-metadata": "^0.1.13",
-    "type-graphql": "^0.16.0"
+    "type-graphql": "^0.17.6"
   }
 }
